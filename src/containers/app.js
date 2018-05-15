@@ -4,6 +4,8 @@ import { withRouter, Route, Switch } from "react-router-dom";
 
 /* Containers */
 import Home from "./home";
+import Puzzle from "./puzzle";
+import NotFound from "./not_found";
 
 class AppContainer extends Component {
   render() {
@@ -23,6 +25,12 @@ class AppContainer extends Component {
               path="/"
               render={() => <Home isLoggedIn={isLoggedIn} />}
             />
+            <Route
+              exact
+              path="/puzzle/:id"
+              component={props => <Puzzle id={props.match.params.id} />}
+            />
+            <Route component={NotFound} />
           </Switch>
         </main>
       </div>

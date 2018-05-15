@@ -1,6 +1,7 @@
-import Request from "api/request";
+import Request from "../request";
 
 const getPuzzleById = id => {
+  console.log("GET PUZZLE BY ID");
   return Request.get(`/puzzle/${id}`);
 };
 

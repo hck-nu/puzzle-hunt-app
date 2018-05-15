@@ -1,8 +1,8 @@
 // @flow
 
-require("isomorphic-fetch");
+import config from "../config";
 
-import config from "config";
+require("isomorphic-fetch");
 
 const appendQueryParams = (path, queryParams) => {
   const e = encodeURIComponent;
@@ -41,7 +41,7 @@ class RequestClient {
       "Content-Type": "application/json"
     };
 
-    console.log(this.hostname);
+    console.log(this);
   }
 
   sign(options = {}, token) {

@@ -1,4 +1,4 @@
-import Request from "api/request";
+import Request from "../request";
 
 const registerTeam = (token, teamName) => {
   Request.get(`/team/${teamName}/register`, Request.sign({}, token));

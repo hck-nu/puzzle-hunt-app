@@ -1,4 +1,4 @@
-import Request from "api/request";
+import Request from "../request";
 
 const loginPlayer = (email, password) => {
   return Request.post("/player/register", {

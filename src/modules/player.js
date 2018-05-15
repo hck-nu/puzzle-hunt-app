@@ -31,7 +31,6 @@ export const register = (email, password) => {
     const response = await registerUser(email, password);
 
     if (response) {
-      console.log(response);
       dispatch({ type: REGISTER_SUCCESS });
       // dispatch(login(email, password));
     } else {
