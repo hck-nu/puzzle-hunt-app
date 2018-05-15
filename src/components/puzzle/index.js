@@ -21,10 +21,10 @@ export default class PuzzlePage extends Component {
     });
   }
 
-  onSubmitAnswer() {
+  onSubmitAnswer = async () => {
     const answer = this.state.answer;
-    console.log(answer);
-  }
+    await this.props.verifyAndCompletePuzzle(this.props.id, answer);
+  };
 
   render() {
     const { puzzle } = this.props;

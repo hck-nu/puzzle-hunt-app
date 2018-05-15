@@ -22,27 +22,34 @@ let initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case REGISTER_SUCCESS:
-      return {
-        ...state,
-        player: action.player,
-        isLoggedIn: true
-      };
+      return state;
     case REGISTER_FAILURE:
       return {
         ...state,
         player: null,
+        token: null,
         isLoggedIn: false
       };
     case LOGIN_SUCCESS:
       return {
         ...state,
         player: action.player,
+        token: action.player,
         isLoggedIn: true
       };
     case LOGIN_FAILURE:
       return {
         ...state,
         player: null,
+        token: null,
+        isLoggedIn: false
+      };
+
+    case LOGOUT:
+      return {
+        ...state,
+        player: null,
+        token: null,
         isLoggedIn: false
       };
     default:
@@ -54,10 +61,9 @@ export const register = (email, password) => {
   return async dispatch => {
     dispatch({ type: REGISTER_REQUESTED });
     const response = await Api.registerPlayer(email, password);
-    console.log(response);
 
     if (isOk(response)) {
-      dispatch({ type: REGISTER_SUCCESS, player: response.player });
+      dispatch({ type: REGISTER_SUCCESS });
       dispatch(login(email, password));
     } else {
       dispatch({ type: REGISTER_FAILURE });
@@ -66,15 +72,25 @@ export const register = (email, password) => {
 };
 
 export const login = (email, password) => {
-  console.log("LOGIN ACTION", email, password);
   return async dispatch => {
     dispatch({ type: LOGIN_REQUESTED });
 
     const response = await Api.loginPlayer(email, password);
-    console.log(response);
 
     if (isOk(response)) {
-      dispatch({ type: LOGIN_SUCCESS, player: response.player });
+      let player = response.player;
+      let token = response.player.Token;
+      console.log(player, token);
+      dispatch({
+        type: LOGIN_SUCCESS,
+        player: {
+          username: player.username,
+          team_id: player.team_id,
+          id: player.id,
+          email: player.email
+        },
+        token: token.value
+      });
       dispatch(push("/dashboard"));
     } else {
       dispatch({ type: LOGIN_FAILURE });

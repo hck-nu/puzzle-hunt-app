@@ -19,5 +19,6 @@ const completePuzzle = (token, id, answer) => {
 };
 
 export default {
-  getPuzzleById
+  getPuzzleById,
+  completePuzzle
 };
