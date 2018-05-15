@@ -5,7 +5,10 @@ import { withRouter, Route, Switch } from "react-router-dom";
 /* Containers */
 import Home from "./home";
 import Puzzle from "./puzzle";
-import NotFound from "./not_found";
+import Registration from "./registration";
+import Login from "./login";
+import Dashboard from "./dashboard";
+import NotFound from "../components/not_found";
 
 class AppContainer extends Component {
   render() {
@@ -30,6 +33,13 @@ class AppContainer extends Component {
               path="/puzzle/:id"
               component={props => <Puzzle id={props.match.params.id} />}
             />
+            <Route
+              exact
+              path="/register"
+              component={props => <Registration />}
+            />
+            <Route exact path="/login" component={props => <Login />} />
+            <Route exact path="/dashboard" component={props => <Dashboard />} />
             <Route component={NotFound} />
           </Switch>
         </main>

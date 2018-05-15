@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Button from "../common/button";
 import Input from "../common/input";
+import NotFound from "../not_found";
 
 export default class PuzzlePage extends Component {
   constructor(props) {
@@ -27,6 +28,11 @@ export default class PuzzlePage extends Component {
 
   render() {
     const { puzzle } = this.props;
+
+    if (!puzzle) {
+      return <NotFound />;
+    }
+
     const puzzlePath = `${window.PUBLIC_URL}/puzzles/${puzzle.path}.jpg`;
 
     return (

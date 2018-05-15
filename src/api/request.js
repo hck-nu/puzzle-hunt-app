@@ -40,8 +40,6 @@ class RequestClient {
       Accept: "application/json",
       "Content-Type": "application/json"
     };
-
-    console.log(this);
   }
 
   sign(options = {}, token) {

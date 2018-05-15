@@ -1,7 +1,7 @@
 import Request from "../request";
 
 const loginPlayer = (email, password) => {
-  return Request.post("/player/register", {
+  return Request.post("/player/login", {
     body: {
       email,
       password

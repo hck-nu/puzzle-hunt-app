@@ -6,7 +6,8 @@ const FormInput = ({
   type = "text",
   placeholder = "",
   onChange,
-  highlight
+  highlight,
+  memo = ""
 }) => (
   <div className={`text-input ${className || ""}`}>
     <input
@@ -18,6 +19,7 @@ const FormInput = ({
       value={value || ""}
       onChange={onChange}
     />
+    {memo && <div className="memo karla gray f6 antialias mt1">{memo}</div>}
   </div>
 );
 
