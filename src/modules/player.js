@@ -15,7 +15,8 @@ const LOGOUT = "player/LOGOUT";
 
 let initialState = {
   isLoggedIn: false,
-  player: null
+  player: null,
+  token: null
 };
 
 export default (state = initialState, action) => {

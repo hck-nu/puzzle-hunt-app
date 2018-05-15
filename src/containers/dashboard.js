@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { registerTeam } from "../modules/team";
 import DashboardPage from "../components/dashboard";
 
 class DashboardContainer extends Component {
@@ -11,6 +12,7 @@ class DashboardContainer extends Component {
 
 const mapStateToProps = state => {
   return {
+    team: state.team.team,
     player: state.player.player
   };
 };
