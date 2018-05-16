@@ -3,13 +3,50 @@ import Button from "../common/button";
 import Input from "../common/input";
 import { Link } from "react-router-dom";
 
+/* Subsections */
+import Profile from "./profile";
+import Teams from "./team";
+import Puzzles from "./puzzles";
+import Nav from "./nav";
+
 export default class DashboardPage extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+
+    this.tabs = ["Profile", "Teams", "Puzzles"];
+    this.state = {
+      tab: 0,
+      name: ""
+    };
+  }
+
+  changeTab = (tab = 0) => {
+    this.setState({ tab });
+  };
+
+  addTeam = async () => {
+    this.props.registerTeam(this.state.name);
+  };
+
+  renderTab() {
+    switch (this.state.tab) {
+      case 0:
+        return <Profile {...this.props} />;
+      case 1:
+        return <Teams {...this.props} />;
+      case 2:
+        return <Puzzles {...this.props} />;
+      default:
+        return <Profile {...this.props} />;
+    }
   }
 
   render() {
-    return <div id="dashboard">DashboardPage</div>;
+    return (
+      <div id="dashboard">
+        <Nav tab={this.state.tab} tabs={this.tabs} changeTab={this.changeTab} />
+        <div id="content">{this.renderTab()}</div>
+      </div>
+    );
   }
 }

@@ -17,6 +17,7 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ registerTeam }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer);

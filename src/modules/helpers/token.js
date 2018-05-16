@@ -12,6 +12,7 @@ const checkTokenAsync = (fn, ...args) => {
     if (state.player.token) {
       dispatch({ type: TOKEN_EXISTS });
       const response = await fn(state.player.token, ...args);
+      console.log("RESPONSE IN TOKEN HANDLER", response);
       return response;
     } else {
       dispatch({ type: TOKEN_MISSING });

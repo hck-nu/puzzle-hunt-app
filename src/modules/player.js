@@ -34,7 +34,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         player: action.player,
-        token: action.player,
+        token: action.token,
         isLoggedIn: true
       };
     case LOGIN_FAILURE:
@@ -80,7 +80,7 @@ export const login = (email, password) => {
     if (isOk(response)) {
       let player = response.player;
       let token = response.player.Token;
-      console.log(player, token);
+
       dispatch({
         type: LOGIN_SUCCESS,
         player: {

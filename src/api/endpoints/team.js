@@ -1,7 +1,7 @@
 import Request from "../request";
 
 const registerTeam = (token, teamName) => {
-  Request.get(`/team/${teamName}/register`, Request.sign({}, token));
+  return Request.post(`/team/${teamName}/register`, Request.sign({}, token));
 };
 
 const getTeamByName = (token, teamName) => {
