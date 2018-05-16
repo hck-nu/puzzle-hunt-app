@@ -19,7 +19,7 @@ const FormInput = ({
       value={value || ""}
       onChange={onChange}
     />
-    {memo && <div className="memo karla gray f6 antialias mt1">{memo}</div>}
+    {memo && <div className="memo karla white f6 antialias mt1">{memo}</div>}
   </div>
 );
 

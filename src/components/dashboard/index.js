@@ -16,8 +16,17 @@ export default class DashboardPage extends Component {
     this.tabs = ["Profile", "Teams", "Puzzles"];
     this.state = {
       tab: 0,
-      name: ""
+      name: "",
+      hasTeam: false
     };
+  }
+
+  componentWillMount() {
+    if (this.props.player && this.props.player.team_id) {
+      this.props.getTeamById(this.props.player.team_id).then(() => {
+        this.setState({ hasTeam: true });
+      });
+    }
   }
 
   changeTab = (tab = 0) => {
@@ -31,7 +40,13 @@ export default class DashboardPage extends Component {
   renderTab() {
     switch (this.state.tab) {
       case 0:
-        return <Profile {...this.props} />;
+        return (
+          <Profile
+            hasTeam={this.state.hasTeam}
+            changeTab={this.changeTab}
+            {...this.props}
+          />
+        );
       case 1:
         return <Teams {...this.props} />;
       case 2:
@@ -43,7 +58,7 @@ export default class DashboardPage extends Component {
 
   render() {
     return (
-      <div id="dashboard">
+      <div id="dashboard" className="white karla">
         <Nav tab={this.state.tab} tabs={this.tabs} changeTab={this.changeTab} />
         <div id="content">{this.renderTab()}</div>
       </div>

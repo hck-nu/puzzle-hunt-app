@@ -2052,6 +2052,7 @@ code, .code { font-family: Consolas, monaco, monospace; }
 .w-01 { width: .1px; }
 .h-01 { height: .1px; }
 .pe-none { pointer-events: none; }
+.tabbed-link { font-weight: 700; text-decoration: underline; cursor: pointer; }
 /* Variables */
 /* Importing here will allow you to override any variables in the modules */
 /*

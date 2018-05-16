@@ -3,7 +3,7 @@ import Button from "../common/button";
 import Input from "../common/input";
 import { Link } from "react-router-dom";
 import validate from "../common/validate";
-import "../../css/regloginstyle.css"
+import "../../css/regloginstyle.css";
 
 export default class RegistrationPage extends Component {
   constructor(props) {
@@ -66,37 +66,43 @@ export default class RegistrationPage extends Component {
   render() {
     return (
       <div id="registration">
-        <img id="logo" src="https://scontent-ort2-1.xx.fbcdn.net/v/t1.15752-9/32783549_10216303580166865_1556274072491393024_n.png?_nc_cat=0&oh=50b04ddfabf0a42cf2cd464c49ed54b3&oe=5B939352" alt="Logo"></img>
-        <form class="inputForm">
-          <label className="error karla gray f6 antialias mt1">
-            {this.state.hasError ? this.state.errorLabel : null}
-          </label>
-          <Input
-            class="field"
-            placeholder="Email"
-            type="text"
-            value={this.state.email}
-            onChange={e => this.onEmailInputUpdate(e.target.value)}
-          />
-          <Input
-            class="field"
-            placeholder="Password"
-            value={this.state.password}
-            onChange={e => this.onPasswordUpdate(e.target.value)}
-            type="password"
-            memo="Minimum of 8 characters, with at least one letter and one number"
-          />
-          <Button
-            backgroundColor="bg-gold"
-            onClick={() => this.onSubmitCredentials()}
-          >
-            Register
-          </Button>
-        </form>
-        <div>
-          <label className="error karla gray f6 antialias mt1 text">
-            Have an account? <Link to={"/login"}>Login</Link>
-          </label>
+        <img id="logo" src={`${window.PUBLIC_URL}/logo.png`} alt="Logo" />
+        <div id="form-container">
+          <form className="input-form">
+            <label className="error karla gray f6 antialias mt1">
+              {this.state.hasError ? this.state.errorLabel : null}
+            </label>
+            <Input
+              class="field"
+              placeholder="Email"
+              type="text"
+              value={this.state.email}
+              onChange={e => this.onEmailInputUpdate(e.target.value)}
+            />
+            <Input
+              class="field"
+              placeholder="Password"
+              value={this.state.password}
+              onChange={e => this.onPasswordUpdate(e.target.value)}
+              type="password"
+              memo="Minimum of 8 characters, with at least one letter and one number"
+            />
+            <Button
+              className="w-100 mt2"
+              backgroundColor="bg-gold"
+              onClick={() => this.onSubmitCredentials()}
+            >
+              Register
+            </Button>
+          </form>
+          <div>
+            <label className="error karla gray f6 antialias mt1 text">
+              Have an account?{" "}
+              <Link className="tabbed-link white" to={"/login"}>
+                Login
+              </Link>
+            </label>
+          </div>
         </div>
       </div>
     );

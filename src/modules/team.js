@@ -25,6 +25,14 @@ export default (state = initialState, action) => {
 export const getTeamById = id => {
   return async dispatch => {
     dispatch({ type: TEAM_REQUESTED });
+    const response = await dispatch(checkTokenAsync(Api.getTeamById, id));
+    console.log("RESPONSE", response);
+
+    if (isOk(response)) {
+      dispatch({ type: TEAM_RECEIVED, team: response.team });
+    } else {
+      dispatch({ type: TEAM_FAILED });
+    }
   };
 };
 

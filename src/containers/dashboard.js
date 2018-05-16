@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { registerTeam } from "../modules/team";
+import { getTeamById, registerTeam } from "../modules/team";
 import DashboardPage from "../components/dashboard";
 
 class DashboardContainer extends Component {
@@ -18,6 +18,6 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ registerTeam }, dispatch);
+  bindActionCreators({ registerTeam, getTeamById }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer);

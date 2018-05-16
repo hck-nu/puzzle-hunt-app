@@ -1,36 +1,49 @@
 #logo {
-	display: block;
-    margin-left: auto;
-    margin-right: auto;
-	height: 45%;
-	width: 45%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
+  width: 45%;
+  min-width: 325px;
 }
 
-.inputForm {
-	display: block;
-    margin-left: auto;
-    margin-right: auto;
-	width: 40%;
+#form-container {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 500px;
+}
+
+.input-form {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 20px;
 }
 
 .text {
-	display: block;
-	margin-left: 30%;
-	color: #efefef;
+  display: block;
+  color: #efefef;
+  text-align: center;
 }
 
 input {
-	background-color: #efefef;
+  background-color: #efefef;
+  width: 100%;
 }
 
-textarea:focus, input:focus {
-	background-color: white;
+.text-input {
+  margin-bottom: 5px;
+}
+
+textarea:focus,
+input:focus {
+  background-color: white;
 }
 
 a:link {
-	color: gold;
+  color: gold;
 }
 
 body {
-	background-color: #07024f;
+  background-color: #07024f;
 }
