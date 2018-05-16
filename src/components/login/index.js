@@ -64,7 +64,7 @@ export default class LoginPage extends Component {
             type="password"
           />
           <Button
-            backgroundColor="bg-pink"
+            backgroundColor="bg-gold"
             onClick={() => this.onSubmitCredentials()}
           >
             Login
