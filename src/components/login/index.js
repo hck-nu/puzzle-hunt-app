@@ -46,7 +46,8 @@ export default class LoginPage extends Component {
   render() {
     return (
       <div id="login">
-        <form>
+        <img id="logo" src="https://scontent-ort2-1.xx.fbcdn.net/v/t1.15752-9/32783549_10216303580166865_1556274072491393024_n.png?_nc_cat=0&oh=50b04ddfabf0a42cf2cd464c49ed54b3&oe=5B939352" alt="Logo"></img>
+        <form class="inputForm">
           <label className="error karla gray f6 antialias mt1">
             {this.state.hasError ? this.state.errorLabel : null}
           </label>
@@ -70,7 +71,7 @@ export default class LoginPage extends Component {
           </Button>
         </form>
         <div>
-          <label>
+          <label className="error karla gray f6 antialias mt1 text">
             Don't have an account?{" "}
             <Link to={"/register"}>Create an account</Link>
           </label>

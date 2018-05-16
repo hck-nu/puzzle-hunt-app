@@ -3,7 +3,7 @@ import Button from "../common/button";
 import Input from "../common/input";
 import { Link } from "react-router-dom";
 import validate from "../common/validate";
-import "../../css/regstyle.css"
+import "../../css/regloginstyle.css"
 
 export default class RegistrationPage extends Component {
   constructor(props) {
