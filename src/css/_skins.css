@@ -350,6 +350,9 @@
 .bg-navy {
   background-color: var(--navy);
 }
+.bg-hck-navy {
+  background-color: var(--hck-navy);
+}
 .bg-dark-blue {
   background-color: var(--dark-blue);
 }

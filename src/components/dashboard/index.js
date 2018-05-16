@@ -58,7 +58,7 @@ export default class DashboardPage extends Component {
 
   render() {
     return (
-      <div id="dashboard" className="white karla">
+      <div id="dashboard" className="white karla bg-hck-navy h-100">
         <Nav tab={this.state.tab} tabs={this.tabs} changeTab={this.changeTab} />
         <div id="content">{this.renderTab()}</div>
       </div>

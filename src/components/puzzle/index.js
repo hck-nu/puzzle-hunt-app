@@ -37,47 +37,47 @@ export default class PuzzlePage extends Component {
     const puzzlePath = `${window.PUBLIC_URL}/puzzles/${puzzle.path}.jpg`;
 
     return (
-      <div id="puzzle">
-        <div id="content">
-          {/* <div id="puzzle-name">{puzzle.name}</div> */}
+      <div id="puzzle" className="bg-white">
+        <section id="content" className="h-100 bg-white dib fl">
           {puzzle.description && (
             <div id="puzzle-description">{puzzle.description}</div>
           )}
           {puzzle.puzzle_type === "image" && (
             <img alt={puzzle.name} src={puzzlePath} />
           )}
-        </div>
-        <div className="input-container">
-          <div id="user-input">
-            <Input
-              className="answer-input"
-              placeholder="Your answer"
-              value={this.state.answer}
-              onChange={e => this.onAnswerInputChange(e.target.value)}
-            />
-          
+        </section>
+        <section id="sidebar" className="h-100 bg-light-gray pa3 dib fl">
+          <div className="input-container">
+            <div id="user-input">
+              <Input
+                className="answer-input"
+                placeholder="Your answer"
+                value={this.state.answer}
+                onChange={e => this.onAnswerInputChange(e.target.value)}
+              />
+
               <Button
                 id="answer"
                 className="submit-button"
                 backgroundColor="bg-pink"
                 onClick={() => this.onSubmitAnswer()}
               >
-                Submit answer
+                Submit
               </Button>
-              
-          </div>
-          
-          <div id="hints">
-            <Button backgroundColor="bg-bronze">Bronze hint</Button>
-            <Button backgroundColor="bg-silver">Silver hint</Button>
-            <Button backgroundColor="bg-gold">Gold hint</Button>
             </div>
 
-            <label>
-              Your team incur's a point deduction by accessing hints. Bronze (-10 points), Silver (-20 points), Gold (-30
-              points)
+            <div id="hints">
+              <Button backgroundColor="bg-bronze">Bronze hint</Button>
+              <Button backgroundColor="bg-silver">Silver hint</Button>
+              <Button backgroundColor="bg-gold">Gold hint</Button>
+            </div>
+
+            <label className="f6">
+              Your team incur's a point deduction by accessing hints. Bronze
+              (-10 points), Silver (-20 points), Gold (-30 points)
             </label>
-        </div>
+          </div>
+        </section>
       </div>
     );
   }

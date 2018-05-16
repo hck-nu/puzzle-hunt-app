@@ -65,7 +65,7 @@ export default class RegistrationPage extends Component {
 
   render() {
     return (
-      <div id="registration">
+      <div id="registration" className="w-100 h-100">
         <img id="logo" src={`${window.PUBLIC_URL}/logo.png`} alt="Logo" />
         <div id="form-container">
           <form className="input-form">
@@ -81,11 +81,11 @@ export default class RegistrationPage extends Component {
             />
             <Input
               class="field"
-              placeholder="Password"
+              placeholder="Password *"
               value={this.state.password}
               onChange={e => this.onPasswordUpdate(e.target.value)}
               type="password"
-              memo="Minimum of 8 characters, with at least one letter and one number"
+              memo="* Minimum of 8 characters, with at least one letter and one number"
             />
             <Button
               className="w-100 mt2"

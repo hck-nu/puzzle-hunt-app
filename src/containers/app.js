@@ -14,14 +14,14 @@ class AppContainer extends Component {
   render() {
     const { isLoggedIn } = this.props;
     return (
-      <div>
+      <div className="w-100 h-100">
         <header
           className="mw9 pt4 center right-0 fixed"
           ref={e => (this.appElement = e)}
         >
           <div className="flex pr4-ns">{isLoggedIn && <div>Button</div>}</div>
         </header>
-        <main>
+        <main className="w-100 h-100">
           <Switch>
             <Route
               exact

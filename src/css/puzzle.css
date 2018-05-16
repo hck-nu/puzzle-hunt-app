@@ -1,27 +1,39 @@
-#content{
-    max-width: 70%;
-    float: left;
+#content {
+  max-width: 70%;
+  float: left;
 }
 
-#puzzle{
-    height:100%;
+#puzzle {
+  height: 100%;
 }
 
-#answer{
-    float: right;
-    margin: 0 10px;
+#answer {
+  float: right;
+  margin: 0 10px;
 }
 
-#user-input{
-    width: 100%;
-    /* float: left; */
-    display: flex;
-    justify-content: space-evenly;
+#user-input {
+  width: 100%;
+  /* float: left; */
+  display: flex;
+  justify-content: space-evenly;
 }
 
-.answer-input, .submit-button{
-    float: left;
-    width: 47%;
+#user-input > .answer-input > input {
+  background-color: white;
+  border-color: #ccc;
+}
+
+#user-input,
+.answer-input,
+.answer-input > input {
+  height: 100%;
+  margin: 0;
+}
+
+.answer-input,
+.submit-button {
+  float: left;
 }
 
 /* .answer-input{
@@ -32,19 +44,22 @@
     margin-left: 1.5%;
 } */
 
-#hints{
-    width: 50%;
-    margin: 10px auto;
-    display: flex;
-    flex-direction: column;
-    height: 13vw;
-    justify-content: space-evenly;
+#hints {
+  width: 50%;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  height: 13vw;
+  justify-content: space-evenly;
 }
 
-.input-container{
-    max-width: 30%;
-    /* float: left; */
-    /* height: 25vw; */
-    display: flex;
-    flex-wrap: wrap;
+#sidebar {
+  max-width: 30%;
+}
+
+.input-container {
+  /* float: left; */
+  /* height: 25vw; */
+  display: flex;
+  flex-wrap: wrap;
 }
