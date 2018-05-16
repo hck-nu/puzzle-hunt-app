@@ -1,0 +1,50 @@
+#content{
+    max-width: 70%;
+    float: left;
+}
+
+#puzzle{
+    height:100%;
+}
+
+#answer{
+    float: right;
+    margin: 0 10px;
+}
+
+#user-input{
+    width: 100%;
+    /* float: left; */
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.answer-input, .submit-button{
+    float: left;
+    width: 47%;
+}
+
+/* .answer-input{
+    margin-right: 1.5%;
+}
+
+.submit-button {
+    margin-left: 1.5%;
+} */
+
+#hints{
+    width: 50%;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    height: 13vw;
+    justify-content: space-evenly;
+}
+
+.input-container{
+    max-width: 30%;
+    /* float: left; */
+    /* height: 25vw; */
+    display: flex;
+    flex-wrap: wrap;
+}
