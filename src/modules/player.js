@@ -46,12 +46,11 @@ export default (state = initialState, action) => {
         isLoggedIn: false
       };
     case TEAM_RECEIVED:
-      console.log("team received in player");
       return {
         ...state,
         player: {
           ...state.player,
-          team_id: action.team.id
+          team_id: action.team ? action.team.id : null
         }
       };
     case LEFT_TEAM_SUCCESS:

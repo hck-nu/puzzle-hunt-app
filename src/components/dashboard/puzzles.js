@@ -39,9 +39,10 @@ export default class Puzzles extends Component {
           <div id="puzzles">
             <h1 className="ma0 pb2">Puzzle list</h1>
             <p className="lh-copy">
-              {this.props.team.name} has completed{" "}
+              You must complete the following puzzles to finish the puzzle hunt.
+              Your team, {this.props.team.name}, has completed{" "}
               {this.props.team.Puzzles.length} of {this.props.puzzles.length}{" "}
-              puzzles{" "}
+              puzzles.
             </p>
             <div>{this.renderPuzzles()}</div>
           </div>

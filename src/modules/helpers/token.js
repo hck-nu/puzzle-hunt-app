@@ -1,4 +1,4 @@
-import { push } from "react-router-redux";
+import { logout } from "../player";
 
 export const VERIFYING_TOKEN = "token/CHECKING_TOKEN";
 export const TOKEN_EXISTS = "token/TOKEN_VERIFIED";
@@ -12,11 +12,14 @@ const checkTokenAsync = (fn, ...args) => {
     if (state.player.token) {
       dispatch({ type: TOKEN_EXISTS });
       const response = await fn(state.player.token, ...args);
-      console.log("RESPONSE IN TOKEN HANDLER", response);
+      if (!response || response.statusCode === 401) {
+        dispatch(logout());
+      }
+
       return response;
     } else {
       dispatch({ type: TOKEN_MISSING });
-      dispatch(push("/logout"));
+      dispatch(logout());
     }
   };
 };

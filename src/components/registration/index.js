@@ -65,7 +65,7 @@ export default class RegistrationPage extends Component {
 
   render() {
     return (
-      <div id="registration" className="w-100 h-100">
+      <div id="registration" className="w-100 min-vh-100">
         <img id="logo" src={require("../logo.png")} alt="Logo" />
         <div id="form-container">
           <form
