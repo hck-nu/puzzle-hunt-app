@@ -17,15 +17,28 @@ export default class PuzzlePage extends Component {
   }
 
   onAnswerInputChange(answer) {
-    this.setState({
-      answer
-    });
+    this.setState({ answer });
   }
 
   onSubmitAnswer = async () => {
     const answer = this.state.answer;
+    this.setState({ answer: "" });
     await this.props.verifyAndCompletePuzzle(this.props.id, answer);
   };
+
+  renderHints() {
+    if (this.props.puzzle && this.props.puzzle.Hints) {
+      return this.props.puzzle.Hints.map((hint, i) => {
+        const hintType =
+          hint.type.charAt(0).toUpperCase() + hint.type.substr(1);
+        return (
+          <div key={i}>
+            <Button backgroundColor={`bg-${hint.type}`}>{hintType} Hint</Button>
+          </div>
+        );
+      });
+    }
+  }
 
   render() {
     const { puzzle } = this.props;
@@ -48,33 +61,34 @@ export default class PuzzlePage extends Component {
         </section>
         <section id="sidebar" className="h-100 bg-light-gray pa3 dib fl">
           <div className="input-container">
-            <div id="user-input">
-              <Input
-                className="answer-input"
-                placeholder="Your answer"
-                value={this.state.answer}
-                onChange={e => this.onAnswerInputChange(e.target.value)}
-              />
+            <form
+              onSubmit={e => {
+                e.preventDefault();
+                this.onSubmitAnswer();
+              }}
+            >
+              <div id="user-input">
+                <Input
+                  className="answer-input"
+                  placeholder="Your answer"
+                  value={this.state.answer}
+                  onChange={e => this.onAnswerInputChange(e.target.value)}
+                />
+                <Button
+                  id="answer"
+                  className="submit-button"
+                  backgroundColor="bg-pink"
+                  type="submit"
+                >
+                  Submit
+                </Button>
+              </div>
+            </form>
 
-              <Button
-                id="answer"
-                className="submit-button"
-                backgroundColor="bg-pink"
-                onClick={() => this.onSubmitAnswer()}
-              >
-                Submit
-              </Button>
-            </div>
-
-            <div id="hints">
-              <Button backgroundColor="bg-bronze">Bronze hint</Button>
-              <Button backgroundColor="bg-silver">Silver hint</Button>
-              <Button backgroundColor="bg-gold">Gold hint</Button>
-            </div>
-
+            <div id="hints">{this.renderHints()}</div>
             <label className="f6">
               Your team incur's a point deduction by accessing hints. Bronze
-              (-10 points), Silver (-20 points), Gold (-30 points)
+              (+10 minutes), Silver (+20 minutes), Gold (+30 minutes)
             </label>
           </div>
         </section>

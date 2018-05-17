@@ -4,10 +4,9 @@ const getPuzzleById = id => {
   return Request.get(`/puzzle/${id}`);
 };
 
-// TODO: game id
 const completePuzzle = (token, id, answer) => {
   return Request.post(
-    `/game/1/puzzle/${id}`,
+    `/puzzle/${id}/complete`,
     Request.sign(
       {
         body: {

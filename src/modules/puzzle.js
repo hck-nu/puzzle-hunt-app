@@ -77,7 +77,9 @@ export const getAllPuzzles = () => {
 export const verifyAndCompletePuzzle = (id, answer) => {
   return async dispatch => {
     dispatch({ type: VERIFY_ANSWER_REQUESTED });
-    const response = await checkTokenAsync(Api.completePuzzle, id, answer);
+    const response = await dispatch(
+      checkTokenAsync(Api.completePuzzle, id, answer)
+    );
     console.log(response);
     if (isOk(response)) {
       dispatch({ type: VERIFY_ANSWER_SUCCESS });
