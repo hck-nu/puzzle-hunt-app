@@ -15,12 +15,6 @@ class AppContainer extends Component {
     const { isLoggedIn } = this.props;
     return (
       <div className="w-100 h-100">
-        <header
-          className="mw9 pt4 center right-0 fixed"
-          ref={e => (this.appElement = e)}
-        >
-          <div className="flex pr4-ns">{isLoggedIn && <div>Button</div>}</div>
-        </header>
         <main className="w-100 h-100">
           <Switch>
             <Route
@@ -50,7 +44,7 @@ class AppContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    isLoggedIn: state.isLoggedIn
+    isLoggedIn: state.player.isLoggedIn
   };
 };
 

@@ -1,4 +1,13 @@
-#dashboard {
+#dashboard #content {
   max-width: 800px;
   margin: 0 auto;
+}
+
+#dashboard nav .nav-item:hover {
+  background-color: #171938;
+}
+
+#dashboard nav a.nav-item {
+  text-decoration: none;
+  color: white;
 }

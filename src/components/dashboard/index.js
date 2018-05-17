@@ -16,27 +16,21 @@ export default class DashboardPage extends Component {
     this.tabs = ["Profile", "Teams", "Puzzles"];
     this.state = {
       tab: 0,
-      name: "",
-      hasTeam: false
+      name: ""
     };
   }
 
-  componentWillMount() {
+  componentWillMount = async () => {
     if (this.props.player && this.props.player.team_id) {
-      this.props.getTeamById(this.props.player.team_id).then(() => {
-        this.setState({ hasTeam: true });
-      });
+      console.log("GET TEAM WITH TEAM ID", this.props.player.team_id);
+      await this.props.getTeamById(this.props.player.team_id);
     }
 
     this.props.getAllPuzzles();
-  }
+  };
 
   changeTab = (tab = 0) => {
     this.setState({ tab });
-  };
-
-  addTeam = async () => {
-    this.props.registerTeam(this.state.name);
   };
 
   renderTab() {
@@ -61,7 +55,12 @@ export default class DashboardPage extends Component {
   render() {
     return (
       <div id="dashboard" className="white karla bg-hck-navy h-100">
-        <Nav tab={this.state.tab} tabs={this.tabs} changeTab={this.changeTab} />
+        <Nav
+          {...this.props}
+          tab={this.state.tab}
+          tabs={this.tabs}
+          changeTab={this.changeTab}
+        />
         <div id="content" className="w-100">
           {this.renderTab()}
         </div>

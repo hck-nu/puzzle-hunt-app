@@ -19,11 +19,29 @@ export default class Profile extends Component {
     return null;
   }
 
+  renderTeamMembers() {
+    if (this.props.team && this.props.team.Players) {
+      return this.props.team.Players.map((player, i) => {
+        return <div key={i}>{player.username}</div>;
+      });
+    }
+  }
+
   renderTeam() {
-    if (this.props.player.team_id && this.props.team) {
+    if (this.props.player && this.props.player.team_id && this.props.team) {
       return (
         <div>
           <label>Team name: {this.props.team.name}</label>
+          <div className="team-members">{this.renderTeamMembers()}</div>
+          <Button
+            className="bg-pink"
+            onClick={e => {
+              e.preventDefault();
+              this.props.leaveTeam();
+            }}
+          >
+            Leave team
+          </Button>
         </div>
       );
     }
@@ -42,11 +60,11 @@ export default class Profile extends Component {
     return (
       <div id="profile">
         <section id="user-profile">
-          <h3>Player</h3>
+          <h3 className="ma0">Player</h3>
           {this.renderPlayer()}
         </section>
         <section id="team-profile">
-          <h3>Team</h3>
+          <h3 className="ma0">Team</h3>
           {this.renderTeam()}
         </section>
       </div>

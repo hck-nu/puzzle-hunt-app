@@ -8,7 +8,7 @@ export default class Puzzles extends Component {
     return this.props.puzzles.map((puzzle, i) => {
       return (
         <Link key={i} to={`/puzzle/${puzzle.id}`}>
-          <h3>{puzzle.name}</h3>
+          <h3 className="ma0">{puzzle.name}</h3>
           <p>{puzzle.description}</p>
         </Link>
       );
