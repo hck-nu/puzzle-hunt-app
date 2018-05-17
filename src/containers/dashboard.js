@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { getTeamById, registerTeam } from "../modules/team";
+import { getAllPuzzles } from "../modules/puzzle";
 import DashboardPage from "../components/dashboard";
 
 class DashboardContainer extends Component {
@@ -13,11 +14,12 @@ class DashboardContainer extends Component {
 const mapStateToProps = state => {
   return {
     team: state.team.team,
-    player: state.player.player
+    player: state.player.player,
+    puzzles: state.puzzle.puzzles
   };
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ registerTeam, getTeamById }, dispatch);
+  bindActionCreators({ registerTeam, getTeamById, getAllPuzzles }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer);

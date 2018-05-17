@@ -27,6 +27,8 @@ export default class DashboardPage extends Component {
         this.setState({ hasTeam: true });
       });
     }
+
+    this.props.getAllPuzzles();
   }
 
   changeTab = (tab = 0) => {
