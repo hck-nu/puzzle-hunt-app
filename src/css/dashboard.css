@@ -21,10 +21,19 @@
   margin: 0 auto;
 }
 
+#dashboard #content {
+  padding-bottom: 10px;
+}
+
 #dashboard #puzzle-list .puzzle-item {
   text-decoration: none;
   color: white;
   cursor: pointer;
-  border: 2px solid white;
+  border: 1px solid white;
+  border-radius: 5px;
   display: block;
+}
+
+#dashboard #puzzle-list .puzzle-item:hover {
+  background-color: #040333;
 }

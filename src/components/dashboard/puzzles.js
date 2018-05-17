@@ -16,18 +16,21 @@ export default class Puzzles extends Component {
     if (!this.props.puzzles) return null;
 
     return this.props.puzzles.map((puzzle, i) => {
+      let isComplete = this.markComplete(puzzle.id);
       return (
         <Link
           key={i}
-          className="puzzle-item pa2 w-100"
+          className={`puzzle-item pa3 w-100 mb3 ${isComplete && "completed"}`}
           to={`/puzzle/${puzzle.id}`}
         >
-          <span className="puzzle-number">#{i}</span>
-          <h3 className="puzzle-name ma0">{puzzle.name}</h3>
-          <p className="puzzle-description">{puzzle.description}</p>
-          <p className="puzzle-is-complete">
-            {this.markComplete(puzzle.id) ? "Completed" : ""}
+          <span className="puzzle-number mr3">#{i}</span>
+          <h3 className="puzzle-name ma0 dib">{puzzle.name}</h3>
+          <p className="puzzle-is-complete dib ttu ma0 small fr gold">
+            {isComplete ? "Completed" : ""}
           </p>
+          {puzzle.description && (
+            <p className="puzzle-description">{puzzle.description}</p>
+          )}
         </Link>
       );
     });
