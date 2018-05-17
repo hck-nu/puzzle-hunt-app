@@ -1,6 +1,7 @@
 import Api from "../api";
 import isOk from "./helpers/response";
 import { push } from "react-router-redux";
+import { TEAM_RECEIVED, LEFT_TEAM_SUCCESS } from "./team";
 
 /* Constants */
 const LOGIN_SUCCESS = "player/LOGIN_SUCCESS";
@@ -44,7 +45,23 @@ export default (state = initialState, action) => {
         token: null,
         isLoggedIn: false
       };
-
+    case TEAM_RECEIVED:
+      console.log("team received in player");
+      return {
+        ...state,
+        player: {
+          ...state.player,
+          team_id: action.team.id
+        }
+      };
+    case LEFT_TEAM_SUCCESS:
+      return {
+        ...state,
+        player: {
+          ...state.player,
+          team_id: null
+        }
+      };
     case LOGOUT:
       return {
         ...state,
@@ -100,6 +117,13 @@ export const login = (email, password) => {
 
 export const logout = () => {
   return async dispatch => {
+    dispatch(push("/login"));
     dispatch({ type: LOGOUT });
+  };
+};
+
+export const goto = route => {
+  return async dispatch => {
+    dispatch(push(route));
   };
 };

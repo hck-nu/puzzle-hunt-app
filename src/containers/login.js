@@ -1,10 +1,16 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { login } from "../modules/player";
+import { login, goto } from "../modules/player";
 import LoginPage from "../components/login";
 
 class LoginContainer extends Component {
+  componentWillMount() {
+    if (this.props.isLoggedIn) {
+      this.props.goto("/dashboard");
+    }
+  }
+
   render() {
     return <LoginPage {...this.props} />;
   }
@@ -12,6 +18,7 @@ class LoginContainer extends Component {
 
 const mapStateToProps = state => {
   return {
+    isLoggedIn: state.player.isLoggedIn,
     player: state.player.player
   };
 };
@@ -19,7 +26,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      login
+      login,
+      goto
     },
     dispatch
   );

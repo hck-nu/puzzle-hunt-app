@@ -45,10 +45,16 @@ export default class LoginPage extends Component {
 
   render() {
     return (
-      <div id="login">
+      <div id="login" className="w-100 h-100">
         <img id="logo" src={`${window.PUBLIC_URL}/logo.png`} alt="Logo" />
         <div id="form-container">
-          <form className="input-form">
+          <form
+            className="input-form"
+            onSubmit={e => {
+              e.preventDefault();
+              this.onSubmitCredentials();
+            }}
+          >
             <label className="error karla gray f6 antialias mt1">
               {this.state.hasError ? this.state.errorLabel : null}
             </label>
@@ -67,7 +73,7 @@ export default class LoginPage extends Component {
             <Button
               className="w-100 mt2"
               backgroundColor="bg-gold"
-              onClick={() => this.onSubmitCredentials()}
+              type="submit"
             >
               Login
             </Button>

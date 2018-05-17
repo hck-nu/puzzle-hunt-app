@@ -2,16 +2,22 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import {
-  getTeamById,
-  registerTeam,
+  submitTeam,
   leaveTeam,
-  joinTeam,
-  getTeamByName
+  getTeamByName,
+  getTeamById
 } from "../modules/team";
 import { getAllPuzzles } from "../modules/puzzle";
+import { logout } from "../modules/player";
 import DashboardPage from "../components/dashboard";
 
 class DashboardContainer extends Component {
+  componentWillMount() {
+    if (!this.props.isLoggedIn) {
+      this.props.logout();
+    }
+  }
+
   render() {
     return <DashboardPage {...this.props} />;
   }
@@ -19,6 +25,7 @@ class DashboardContainer extends Component {
 
 const mapStateToProps = state => {
   return {
+    isLoggedIn: state.player.isLoggedIn,
     team: state.team.team,
     player: state.player.player,
     puzzles: state.puzzle.puzzles
@@ -28,12 +35,12 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      registerTeam,
-      getTeamById,
+      submitTeam,
       getAllPuzzles,
       getTeamByName,
       leaveTeam,
-      joinTeam
+      getTeamById,
+      logout
     },
     dispatch
   );
