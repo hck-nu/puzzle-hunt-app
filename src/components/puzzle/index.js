@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import crypto from "crypto";
+import config from "../../config";
 import Button from "../common/button";
 import Input from "../common/input";
 import NotFound from "../not_found";
@@ -26,6 +28,14 @@ export default class PuzzlePage extends Component {
     await this.props.verifyAndCompletePuzzle(this.props.id, answer);
   };
 
+  accessHint(encrypted) {
+    const key = config.DECRYPTION_KEY;
+    let decipher = crypto.createDecipher("aes-256-ctr", key);
+    let dec = decipher.update(encrypted, "hex", "utf8");
+    dec += decipher.final("utf8");
+    console.log(dec);
+  }
+
   renderHints() {
     if (this.props.puzzle && this.props.puzzle.Hints) {
       return this.props.puzzle.Hints.map((hint, i) => {
@@ -33,7 +43,12 @@ export default class PuzzlePage extends Component {
           hint.type.charAt(0).toUpperCase() + hint.type.substr(1);
         return (
           <div key={i}>
-            <Button backgroundColor={`bg-${hint.type}`}>{hintType} Hint</Button>
+            <Button
+              backgroundColor={`bg-${hint.type}`}
+              onClick={e => this.accessHint(hint.description)}
+            >
+              {hintType} Hint
+            </Button>
           </div>
         );
       });
