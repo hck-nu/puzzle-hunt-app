@@ -12,37 +12,23 @@ import Nav from "./nav";
 export default class DashboardPage extends Component {
   constructor(props) {
     super(props);
-
-    this.tabs = ["Profile", "Teams", "Puzzles"];
     this.state = {
-      tab: 0,
       name: ""
     };
   }
 
   componentWillMount = async () => {
     if (this.props.player && this.props.player.team_id) {
-      console.log("GET TEAM WITH TEAM ID", this.props.player.team_id);
       await this.props.getTeamById(this.props.player.team_id);
     }
 
     this.props.getAllPuzzles();
   };
 
-  changeTab = (tab = 0) => {
-    this.setState({ tab });
-  };
-
   renderTab() {
-    switch (this.state.tab) {
+    switch (this.props.tab) {
       case 0:
-        return (
-          <Profile
-            hasTeam={this.state.hasTeam}
-            changeTab={this.changeTab}
-            {...this.props}
-          />
-        );
+        return <Profile changeTab={this.props.changeTab} {...this.props} />;
       case 1:
         return <Teams {...this.props} />;
       case 2:
@@ -57,9 +43,9 @@ export default class DashboardPage extends Component {
       <div id="dashboard" className="white karla bg-hck-navy h-100">
         <Nav
           {...this.props}
-          tab={this.state.tab}
-          tabs={this.tabs}
-          changeTab={this.changeTab}
+          tab={this.props.tab}
+          tabs={this.props.tabs}
+          changeTab={this.props.changeTab}
         />
         <div id="content" className="w-100">
           {this.renderTab()}

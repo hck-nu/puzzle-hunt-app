@@ -11,6 +11,18 @@ import Dashboard from "./dashboard";
 import NotFound from "../components/not_found";
 
 class AppContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.tabs = ["Profile", "Teams", "Puzzles"];
+    this.state = {
+      tab: 0
+    };
+  }
+
+  changeTab = (tab = 0) => {
+    this.setState({ tab });
+  };
+
   render() {
     const { isLoggedIn } = this.props;
     return (
@@ -33,7 +45,17 @@ class AppContainer extends Component {
               component={props => <Registration />}
             />
             <Route exact path="/login" component={props => <Login />} />
-            <Route exact path="/dashboard" component={props => <Dashboard />} />
+            <Route
+              exact
+              path="/dashboard"
+              component={props => (
+                <Dashboard
+                  tabs={this.tabs}
+                  tab={this.state.tab}
+                  changeTab={this.changeTab}
+                />
+              )}
+            />
             <Route component={NotFound} />
           </Switch>
         </main>
