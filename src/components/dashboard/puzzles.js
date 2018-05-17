@@ -37,7 +37,7 @@ export default class Puzzles extends Component {
   }
   render() {
     return (
-      <div id="puzzle-list" className="pt6 w-100">
+      <div id="puzzle-list" className="pt6 w-100 pl2 pr2">
         {this.props.team && this.props.puzzles ? (
           <div id="puzzles">
             <h1 className="ma0 pb2">Puzzle list</h1>

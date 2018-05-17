@@ -24,11 +24,16 @@ const submitTeam = (token, teamName) => {
   return Request.post(`/team/${teamName}/submit`, Request.sign({}, token));
 };
 
+const getLeaderboard = () => {
+  return Request.get("/leaderboard");
+};
+
 export default {
   registerTeam,
   getTeamByName,
   leaveTeam,
   joinTeam,
   getTeamById,
-  submitTeam
+  submitTeam,
+  getLeaderboard
 };

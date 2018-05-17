@@ -13,7 +13,7 @@ import NotFound from "../components/not_found";
 class AppContainer extends Component {
   constructor(props) {
     super(props);
-    this.tabs = ["Profile", "Teams", "Puzzles"];
+    this.tabs = ["Profile", "Join Team", "Puzzles"];
     this.state = {
       tab: 0
     };

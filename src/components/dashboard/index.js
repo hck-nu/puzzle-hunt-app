@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import Button from "../common/button";
-import Input from "../common/input";
-import { Link } from "react-router-dom";
 
 /* Subsections */
 import Profile from "./profile";

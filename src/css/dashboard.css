@@ -16,7 +16,8 @@
   color: white;
 }
 
-#dashboard #create-team .form-container {
+#dashboard #create-team .form-container,
+#dashboard .leave-team {
   max-width: 400px;
   margin: 0 auto;
 }
@@ -36,4 +37,35 @@
 
 #dashboard #puzzle-list .puzzle-item:hover {
   background-color: #040333;
+}
+
+#dashboard #team-stats {
+  width: 250px;
+  border-radius: 3px;
+}
+
+#dashboard #leaderboard {
+  width: 60%;
+}
+
+#dashboard #leaderboard .leaderboard-item:nth-child(odd) {
+  background-color: #040333;
+}
+
+@media screen and (max-width: 800px) {
+  #dashboard #leaderboard,
+  #dashboard #team-stats {
+    width: 100%;
+  }
+
+  #dashboard #team-stats {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  #dashboard #profile {
+    padding-top: 60px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
 }

@@ -5,7 +5,8 @@ import {
   submitTeam,
   leaveTeam,
   getTeamByName,
-  getTeamById
+  getTeamById,
+  getLeaderboard
 } from "../modules/team";
 import { getAllPuzzles } from "../modules/puzzle";
 import { logout } from "../modules/player";
@@ -28,7 +29,8 @@ const mapStateToProps = state => {
     isLoggedIn: state.player.isLoggedIn,
     team: state.team.team,
     player: state.player.player,
-    puzzles: state.puzzle.puzzles
+    puzzles: state.puzzle.puzzles,
+    leaderboard: state.team.leaderboard
   };
 };
 
@@ -40,7 +42,8 @@ const mapDispatchToProps = dispatch =>
       getTeamByName,
       leaveTeam,
       getTeamById,
-      logout
+      logout,
+      getLeaderboard
     },
     dispatch
   );

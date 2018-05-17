@@ -12,9 +12,13 @@ export const TEAM_NOT_FOUND = "team/TEAM_NOT_FOUND";
 export const LEFT_TEAM_SUCCESS = "team/LEFT_TEAM_SUCCESS";
 export const LEFT_TEAM_FAILURE = "team/LEFT_TEAM_FAILURE";
 
+export const LEADERBOARD_SUCCESS = "team/LEADERBOARD_SUCCESS";
+export const LEADERBOARD_FAILURE = "team/LEADERBOARD_FAILURE";
+
 let initialState = {
   team: null,
-  team_exists: false
+  team_exists: false,
+  leaderboard: []
 };
 
 export default (state = initialState, action) => {
@@ -41,6 +45,11 @@ export default (state = initialState, action) => {
         ...state,
         team: null,
         team_exists: false
+      };
+    case LEADERBOARD_SUCCESS:
+      return {
+        ...state,
+        leaderboard: action.leaderboard
       };
     default:
       return state;
@@ -83,34 +92,19 @@ export const submitTeam = teamName => {
   };
 };
 
-// export const registerTeam = teamName => {
-//   return async dispatch => {
-//     const response = await dispatch(
-//       checkTokenAsync(Api.registerTeam, teamName)
-//     );
-
-//     if (isOk(response)) {
-//       dispatch({ type: TEAM_RECEIVED, team: response.team });
-//     } else {
-//       dispatch({ type: TEAM_NOT_RECEIVED });
-//     }
-//   };
-// };
-
-// export const joinTeam = id => {
-//   return async dispatch => {
-//     const response = await dispatch(checkTokenAsync(Api.joinTeam, id));
-
-//     if (isOk(response)) {
-//       if (response.success) {
-//         console.log("JOIN");
-//         dispatch({ type: TEAM_RECEIVED, team: response.team });
-//       }
-//     } else {
-//       dispatch({ type: TEAM_NOT_RECEIVED });
-//     }
-//   };
-// };
+export const getLeaderboard = () => {
+  return async dispatch => {
+    const response = await Api.getLeaderboard();
+    if (isOk(response)) {
+      dispatch({
+        type: LEADERBOARD_SUCCESS,
+        leaderboard: response.leaderboard
+      });
+    } else {
+      dispatch({ type: LEADERBOARD_FAILURE });
+    }
+  };
+};
 
 export const leaveTeam = () => {
   return async dispatch => {
