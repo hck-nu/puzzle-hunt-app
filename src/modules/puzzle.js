@@ -15,9 +15,16 @@ const VERIFY_ANSWER_REQUESTED = "puzzle/VERIFY_ANSWER_REQUESTED";
 const VERIFY_ANSWER_SUCCESS = "puzzle/VERIFY_ANSWER_SUCCESS";
 const VERIFY_ANSWER_FAILURE = "puzzle/VERIFY_ANSWER_FAILURE";
 
+const ACCESS_HINT_FAILURE = "puzzle/ACCESS_HINT_FAILURE";
+const ACCESS_HINT_SUCCESS = "puzzle/ACCESS_HINT_SUCCESS";
+
+const GET_ACCESSED_HINTS_SUCCESS = "puzzle/GET_ACCESSED_HINTS_SUCCESS";
+const GET_ACCESSED_HINTS_FAILURE = "puzzle/GET_ACCESSED_HINTS_FAILURE";
+
 let initialState = {
   puzzle: null,
-  puzzles: []
+  puzzles: [],
+  accessed_hints: []
 };
 
 export default (state = initialState, action) => {
@@ -36,6 +43,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         puzzles: action.puzzles
+      };
+    case GET_ACCESSED_HINTS_SUCCESS:
+      console.log("ACTION", action.accessed_hints);
+      return {
+        ...state,
+        accessed_hints: action.accessed_hints
       };
     default:
       return state;
@@ -85,6 +98,41 @@ export const verifyAndCompletePuzzle = (id, answer) => {
       dispatch({ type: VERIFY_ANSWER_SUCCESS });
     } else {
       dispatch({ type: VERIFY_ANSWER_FAILURE });
+    }
+  };
+};
+
+export const getAccessedHints = puzzleId => {
+  return async dispatch => {
+    const response = await dispatch(
+      checkTokenAsync(Api.getAccessHints, puzzleId)
+    );
+
+    console.log(response);
+    if (isOk(response)) {
+      dispatch({
+        type: GET_ACCESSED_HINTS_SUCCESS,
+        accessed_hints: response.hints
+      });
+    } else {
+      dispatch({
+        type: GET_ACCESSED_HINTS_FAILURE
+      });
+    }
+  };
+};
+
+export const accessHint = (puzzleId, hintId) => {
+  return async dispatch => {
+    const response = await dispatch(
+      checkTokenAsync(Api.accessPuzzleHint, puzzleId, hintId)
+    );
+    console.log(response);
+    if (isOk(response)) {
+      dispatch({ type: ACCESS_HINT_SUCCESS });
+      dispatch(getAccessedHints(puzzleId));
+    } else {
+      dispatch({ type: ACCESS_HINT_FAILURE });
     }
   };
 };

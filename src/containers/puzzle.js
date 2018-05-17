@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { getPuzzle, verifyAndCompletePuzzle } from "../modules/puzzle";
+import {
+  getPuzzle,
+  verifyAndCompletePuzzle,
+  accessHint,
+  getAccessedHints
+} from "../modules/puzzle";
 import PuzzlePage from "../components/puzzle";
 
 class PuzzleContainer extends Component {
@@ -12,7 +17,8 @@ class PuzzleContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    puzzle: state.puzzle.puzzle
+    puzzle: state.puzzle.puzzle,
+    accessed_hints: state.puzzle.accessed_hints
   };
 };
 
@@ -20,7 +26,9 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getPuzzle,
-      verifyAndCompletePuzzle
+      verifyAndCompletePuzzle,
+      accessHint,
+      getAccessedHints
     },
     dispatch
   );

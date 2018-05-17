@@ -22,8 +22,21 @@ const getAllPuzzles = token => {
   return Request.get("/puzzles", Request.sign({}, token));
 };
 
+const accessPuzzleHint = (token, puzzleId, hintId) => {
+  return Request.post(
+    `/puzzle/${puzzleId}/hint/${hintId}`,
+    Request.sign({}, token)
+  );
+};
+
+const getAccessHints = (token, puzzleId) => {
+  return Request.get(`/puzzle/${puzzleId}/hints`, Request.sign({}, token));
+};
+
 export default {
   getPuzzleById,
   completePuzzle,
-  getAllPuzzles
+  getAllPuzzles,
+  accessPuzzleHint,
+  getAccessHints
 };

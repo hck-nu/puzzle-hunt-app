@@ -45,7 +45,6 @@
 } */
 
 #puzzle #hints {
-  width: 50%;
   margin: 10px auto;
   display: flex;
   flex-direction: column;

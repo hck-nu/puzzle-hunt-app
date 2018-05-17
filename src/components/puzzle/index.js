@@ -16,6 +16,7 @@ export default class PuzzlePage extends Component {
 
   componentWillMount() {
     this.props.getPuzzle(this.props.id);
+    this.props.getAccessedHints(this.props.id);
   }
 
   onAnswerInputChange(answer) {
@@ -28,27 +29,40 @@ export default class PuzzlePage extends Component {
     await this.props.verifyAndCompletePuzzle(this.props.id, answer);
   };
 
-  accessHint(encrypted) {
+  decryptHint = hint => {
     const key = config.DECRYPTION_KEY;
     let decipher = crypto.createDecipher("aes-256-ctr", key);
-    let dec = decipher.update(encrypted, "hex", "utf8");
+    let dec = decipher.update(hint.description, "hex", "utf8");
     dec += decipher.final("utf8");
-    console.log(dec);
-  }
+    return dec;
+  };
+
+  accessHint = async hint => {
+    await this.props.accessHint(this.props.puzzle.id, hint.id);
+  };
 
   renderHints() {
     if (this.props.puzzle && this.props.puzzle.Hints) {
+      const accessedHints = this.props.accessed_hints || [];
       return this.props.puzzle.Hints.map((hint, i) => {
         const hintType =
           hint.type.charAt(0).toUpperCase() + hint.type.substr(1);
+        const accessedBefore =
+          accessedHints.findIndex(el => {
+            return el.id === hint.id;
+          }) > -1;
         return (
-          <div key={i}>
-            <Button
-              backgroundColor={`bg-${hint.type}`}
-              onClick={e => this.accessHint(hint.description)}
-            >
-              {hintType} Hint
-            </Button>
+          <div className="hint-item" key={i}>
+            {accessedBefore ? (
+              <div>{this.decryptHint(hint)}</div>
+            ) : (
+              <Button
+                backgroundColor={`bg-${hint.type}`}
+                onClick={e => this.accessHint(hint)}
+              >
+                {hintType} Hint
+              </Button>
+            )}
           </div>
         );
       });
