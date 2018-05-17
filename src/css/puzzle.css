@@ -1,4 +1,4 @@
-#content {
+#puzzle #content {
   max-width: 70%;
   float: left;
 }
@@ -7,32 +7,32 @@
   height: 100%;
 }
 
-#answer {
+#puzzle #answer {
   float: right;
   margin: 0 10px;
 }
 
-#user-input {
+#puzzle #user-input {
   width: 100%;
   /* float: left; */
   display: flex;
   justify-content: space-evenly;
 }
 
-#user-input > .answer-input > input {
+#puzzle #user-input > .answer-input > input {
   background-color: white;
   border-color: #ccc;
 }
 
-#user-input,
-.answer-input,
-.answer-input > input {
+#puzzle #user-input,
+#puzzle .answer-input,
+#puzzle .answer-input > input {
   height: 100%;
   margin: 0;
 }
 
-.answer-input,
-.submit-button {
+#puzzle .answer-input,
+#puzzle .submit-button {
   float: left;
 }
 
@@ -44,7 +44,7 @@
     margin-left: 1.5%;
 } */
 
-#hints {
+#puzzle #hints {
   width: 50%;
   margin: 10px auto;
   display: flex;
@@ -53,11 +53,11 @@
   justify-content: space-evenly;
 }
 
-#sidebar {
+#puzzle #sidebar {
   max-width: 30%;
 }
 
-.input-container {
+#puzzle .input-container {
   /* float: left; */
   /* height: 25vw; */
   display: flex;

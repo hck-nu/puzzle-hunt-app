@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { getTeamById, registerTeam } from "../modules/team";
+import {
+  getTeamById,
+  registerTeam,
+  leaveTeam,
+  joinTeam,
+  getTeamByName
+} from "../modules/team";
 import { getAllPuzzles } from "../modules/puzzle";
 import DashboardPage from "../components/dashboard";
 
@@ -20,6 +26,16 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ registerTeam, getTeamById, getAllPuzzles }, dispatch);
+  bindActionCreators(
+    {
+      registerTeam,
+      getTeamById,
+      getAllPuzzles,
+      getTeamByName,
+      leaveTeam,
+      joinTeam
+    },
+    dispatch
+  );
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer);

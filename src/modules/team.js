@@ -26,7 +26,19 @@ export const getTeamById = id => {
   return async dispatch => {
     dispatch({ type: TEAM_REQUESTED });
     const response = await dispatch(checkTokenAsync(Api.getTeamById, id));
-    console.log("RESPONSE", response);
+
+    if (isOk(response)) {
+      dispatch({ type: TEAM_RECEIVED, team: response.team });
+    } else {
+      dispatch({ type: TEAM_FAILED });
+    }
+  };
+};
+
+export const getTeamByName = name => {
+  return async dispatch => {
+    dispatch({ type: TEAM_REQUESTED });
+    const response = await dispatch(checkTokenAsync(Api.getTeamByName, name));
 
     if (isOk(response)) {
       dispatch({ type: TEAM_RECEIVED, team: response.team });
@@ -47,6 +59,32 @@ export const registerTeam = teamName => {
       dispatch({ type: TEAM_REGISTER_SUCCESS });
     } else {
       dispatch({ type: TEAM_REGISTER_FAILED });
+    }
+  };
+};
+
+export const joinTeam = id => {
+  return async dispatch => {
+    dispatch({ type: TEAM_REQUESTED });
+    const response = await dispatch(checkTokenAsync(Api.joinTeam, id));
+
+    if (isOk(response)) {
+      dispatch({ type: TEAM_RECEIVED, team: response.team });
+    } else {
+      dispatch({ type: TEAM_FAILED });
+    }
+  };
+};
+
+export const leaveTeam = () => {
+  return async dispatch => {
+    dispatch({ type: TEAM_REQUESTED });
+    const response = await dispatch(checkTokenAsync(Api.leaveTeam));
+
+    if (isOk(response)) {
+      dispatch({ type: TEAM_RECEIVED, team: null });
+    } else {
+      dispatch({ type: TEAM_FAILED });
     }
   };
 };

@@ -62,7 +62,9 @@ export default class DashboardPage extends Component {
     return (
       <div id="dashboard" className="white karla bg-hck-navy h-100">
         <Nav tab={this.state.tab} tabs={this.tabs} changeTab={this.changeTab} />
-        <div id="content">{this.renderTab()}</div>
+        <div id="content" className="w-100">
+          {this.renderTab()}
+        </div>
       </div>
     );
   }
