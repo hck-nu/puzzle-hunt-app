@@ -4,10 +4,19 @@
 }
 
 #dashboard nav .nav-item:hover {
-  background-color: #171938;
+  border-bottom: 3px solid #fff;
+}
+
+#dashboard nav .nav-item.active {
+  border-bottom: 3px solid #fff;
 }
 
 #dashboard nav a.nav-item {
   text-decoration: none;
   color: white;
+}
+
+#dashboard #create-team .form-container {
+  max-width: 400px;
+  margin: 0 auto;
 }

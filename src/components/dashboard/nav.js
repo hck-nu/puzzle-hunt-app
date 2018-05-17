@@ -5,10 +5,13 @@ export default class Nav extends Component {
   loadTabs() {
     const tabs = this.props.tabs || [];
     return tabs.map((tab, i) => {
+      const isActive = this.props.tab === i;
       return (
         <div
           key={i}
-          className="pa3 pointer nav-item"
+          className={`pt3 pb2 ml3 mr3 pointer nav-item ${
+            isActive ? "active" : ""
+          }`}
           onClick={e => this.props.changeTab(i)}
         >
           {tab}
@@ -26,7 +29,7 @@ export default class Nav extends Component {
               e.preventDefault();
               this.props.logout();
             }}
-            className="pa3 pointer nav-item"
+            className="pt3 pb2 ml3 mr3 pointer nav-item"
           >
             Logout
           </a>
