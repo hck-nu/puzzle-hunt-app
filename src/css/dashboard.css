@@ -20,3 +20,11 @@
   max-width: 400px;
   margin: 0 auto;
 }
+
+#dashboard #puzzle-list .puzzle-item {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+  border: 2px solid white;
+  display: block;
+}

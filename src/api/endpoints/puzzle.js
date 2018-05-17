@@ -18,8 +18,8 @@ const completePuzzle = (token, id, answer) => {
   );
 };
 
-const getAllPuzzles = () => {
-  return Request.get("/puzzles", {});
+const getAllPuzzles = token => {
+  return Request.get("/puzzles", Request.sign({}, token));
 };
 
 export default {
