@@ -46,4 +46,10 @@ a:link {
 
 #registration {
   background-color: #07024f;
+  height: 100%;
+}
+
+#login {
+  background-color: #07024f;
+  height: 100%;
 }
