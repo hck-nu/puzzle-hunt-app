@@ -40,14 +40,14 @@ export default class DashboardPage extends Component {
 
   render() {
     return (
-      <div id="dashboard" className="white karla bg-hck-navy h-100">
+      <div id="dashboard" className="white karla bg-hck-navy min-vh-100">
         <Nav
           {...this.props}
           tab={this.props.tab}
           tabs={this.props.tabs}
           changeTab={this.props.changeTab}
         />
-        <div id="content" className="w-100">
+        <div id="content" className="w-100 min-vh-100">
           {this.renderTab()}
         </div>
       </div>

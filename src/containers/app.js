@@ -26,8 +26,8 @@ class AppContainer extends Component {
   render() {
     const { isLoggedIn } = this.props;
     return (
-      <div className="w-100 h-100">
-        <main className="w-100 h-100">
+      <div className="w-100 min-vh-100">
+        <main className="w-100 min-vh-100">
           <Switch>
             <Route
               exact

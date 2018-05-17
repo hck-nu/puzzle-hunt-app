@@ -35,7 +35,23 @@ export default class Puzzles extends Component {
   render() {
     return (
       <div id="puzzle-list" className="pt6 w-100">
-        {this.renderPuzzles()}
+        {this.props.team && this.props.puzzles ? (
+          <div id="puzzles">
+            <h1 className="ma0 pb2">Puzzle list</h1>
+            <p className="lh-copy">
+              {this.props.team.name} has completed{" "}
+              {this.props.team.Puzzles.length} of {this.props.puzzles.length}{" "}
+              puzzles{" "}
+            </p>
+            <div>{this.renderPuzzles()}</div>
+          </div>
+        ) : (
+          <div>
+            <h1 className="ma0 pb2">
+              You must join a team to view these puzzles
+            </h1>
+          </div>
+        )}
       </div>
     );
   }
