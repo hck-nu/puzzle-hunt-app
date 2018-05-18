@@ -91,8 +91,35 @@ export const submitTeam = teamName => {
         );
       }
     } else {
-      console.log(response);
       dispatch({ type: TEAM_NOT_RECEIVED });
+
+      if (response && response.source) {
+        if (response.source === "full") {
+          dispatch(
+            displayBanner(
+              "There is already the maximum amount of members on this team",
+              "light-red",
+              3000
+            )
+          );
+        } else if (response.source === "member") {
+          dispatch(
+            displayBanner(
+              "You are already a member of this team",
+              "light-red",
+              3000
+            )
+          );
+        } else {
+          dispatch(
+            displayBanner("An unknown error occurred.", "light-red", 3000)
+          );
+        }
+      } else {
+        dispatch(
+          displayBanner("An unknown error occurred.", "light-red", 3000)
+        );
+      }
     }
   };
 };

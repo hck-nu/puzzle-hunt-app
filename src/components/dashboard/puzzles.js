@@ -38,7 +38,10 @@ export default class Puzzles extends Component {
   render() {
     return (
       <div id="puzzle-list" className="pt6 w-100 pl2 pr2">
-        {this.props.team && this.props.puzzles ? (
+        {this.props.team &&
+        this.props.player &&
+        this.props.player.team_id &&
+        this.props.puzzles ? (
           <div id="puzzles">
             <h1 className="ma0 pb2">Puzzle list</h1>
             <p className="lh-copy">
@@ -51,9 +54,17 @@ export default class Puzzles extends Component {
           </div>
         ) : (
           <div>
-            <h1 className="ma0 pb2">
-              You must join a team to view these puzzles
+            <h1 className="ma0 pb2 pt3">
+              Sorry, you must join a team to view these puzzles!
             </h1>
+            <p>
+              <a
+                className="tabbed-link lh-copy fr"
+                onClick={e => this.props.changeTab(1)}
+              >
+                Join a team
+              </a>
+            </p>
           </div>
         )}
       </div>
