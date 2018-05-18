@@ -1,4 +1,6 @@
 import React from "react";
+import "../../css/puzzle.css";
+
 
 const AudioPuzzle = ({ puzzle }) => {
   const audiopath = `${window.PUBLIC_URL}/puzzles/${puzzle.path}`;
@@ -15,7 +17,7 @@ const AudioPuzzle = ({ puzzle }) => {
       <p className="pb3">{puzzle.description}</p>
       {audiofiles.map((file, i) => {
         return (
-          <audio key={i} controls className="db">
+          <audio id="audio-style" key={i} controls className="db">
             <source src={`${audiopath}/${file}.mp3`} type="audio/mpeg" />
             Your browser does not support the audio element.
           </audio>

@@ -13,13 +13,13 @@ const checkTokenAsync = (fn, ...args) => {
       dispatch({ type: TOKEN_EXISTS });
       const response = await fn(state.player.token, ...args);
       if (!response || response.statusCode === 401) {
-        dispatch(logout());
+        // dispatch(logout());
       }
 
       return response;
     } else {
       dispatch({ type: TOKEN_MISSING });
-      dispatch(logout());
+      // dispatch(logout());
     }
   };
 };

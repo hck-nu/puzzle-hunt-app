@@ -7,6 +7,7 @@ import NotFound from "../not_found";
 import AudioPuzzle from "./audio_puzzle";
 import ImagePuzzle from "./image_puzzle";
 import "../../css/puzzle.css";
+import { Link } from "react-router-dom";
 
 export default class PuzzlePage extends Component {
   constructor(props) {
@@ -71,8 +72,20 @@ export default class PuzzlePage extends Component {
     }
   }
 
+ // nextPuzzle(puzzleID){
+
+ //    if (puzzleID < 6)
+ //    {
+ //      puzzleID += 1;
+ //    }
+ //    else
+ //      puzzleID = 1;
+ // return puzzleID;
+ //  }
+
   render() {
     const { puzzle } = this.props;
+
 
     if (!puzzle) {
       return <NotFound />;
@@ -83,7 +96,7 @@ export default class PuzzlePage extends Component {
           {puzzle.puzzle_type === "audio" ? (
             <AudioPuzzle puzzle={puzzle} />
           ) : (
-            <ImagePuzzle puzzle={puzzle} />
+            <ImagePuzzle id="puzzle-pic" puzzle={puzzle} />
           )}
         </section>
         <section id="sidebar" className="h-100 bg-light-gray pa3 dib fl">
@@ -117,7 +130,13 @@ export default class PuzzlePage extends Component {
               Your team incur's a point deduction by accessing hints. Bronze
               (+10 minutes), Silver (+20 minutes), Gold (+30 minutes)
             </label>
+            <div id="puzzle-buttons">
+              <Button className="prev-next">Previous Puzzle</Button>
+              <Button className="prev-next">Next Puzzle</Button>
+            </div>
           </div>
+
+          <img id="logo" src={require("../logo.png")} alt="Logo" />
         </section>
       </div>
     );
