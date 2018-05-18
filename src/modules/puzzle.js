@@ -36,6 +36,13 @@ const FAILURE_MESSAGES = [
   "Correct...Opposite day!"
 ];
 
+// in minutes
+const POINT_DEDUCTIONS = {
+  bronze: 10,
+  silver: 20,
+  gold: 30
+};
+
 let initialState = {
   puzzle: null,
   puzzles: [],
@@ -160,6 +167,21 @@ export const getAccessedHints = puzzleId => {
   };
 };
 
+const pointDeductionMessage = hintType => {
+  return dispatch => {
+    if (hintType in POINT_DEDUCTIONS) {
+      console.log(hintType, typeof hintType);
+      dispatch(
+        displayBanner(
+          `Added ${POINT_DEDUCTIONS[hintType]} minutes to your team's time`,
+          hintType,
+          3000
+        )
+      );
+    }
+  };
+};
+
 export const accessHint = (puzzleId, hintId) => {
   return async dispatch => {
     const response = await dispatch(
@@ -167,7 +189,13 @@ export const accessHint = (puzzleId, hintId) => {
     );
 
     if (isOk(response)) {
-      dispatch({ type: ACCESS_HINT_SUCCESS });
+      if (response.meta.success) {
+        dispatch({ type: ACCESS_HINT_SUCCESS });
+        if (response.hint) {
+          dispatch(pointDeductionMessage(response.hint.type));
+        }
+      }
+
       dispatch(getAccessedHints(puzzleId));
     } else {
       dispatch({ type: ACCESS_HINT_FAILURE });
