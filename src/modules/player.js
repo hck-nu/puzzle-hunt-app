@@ -2,6 +2,7 @@ import Api from "../api";
 import isOk from "./helpers/response";
 import { push } from "react-router-redux";
 import { TEAM_RECEIVED, LEFT_TEAM_SUCCESS } from "./team";
+import { displayBanner } from "../modules/banner";
 
 /* Constants */
 const LOGIN_SUCCESS = "player/LOGIN_SUCCESS";
@@ -83,6 +84,7 @@ export const register = (email, password) => {
       dispatch(login(email, password));
     } else {
       dispatch({ type: REGISTER_FAILURE });
+      dispatch(displayBanner("Registration failed! Please try again."));
     }
   };
 };
@@ -91,12 +93,11 @@ export const login = (email, password) => {
   return async dispatch => {
     dispatch({ type: LOGIN_REQUESTED });
 
+    console.log("LOGGING IN", email, password);
     const response = await Api.loginPlayer(email, password);
-
     if (isOk(response)) {
       let player = response.player;
       let token = response.player.Token;
-
       dispatch({
         type: LOGIN_SUCCESS,
         player: {
@@ -108,8 +109,14 @@ export const login = (email, password) => {
         token: token.value
       });
       dispatch(push("/dashboard"));
+      dispatch(
+        displayBanner("Welcome! Happy puzzle hunting!", "light-green", 3000)
+      );
     } else {
       dispatch({ type: LOGIN_FAILURE });
+      dispatch(
+        displayBanner("Login failed! Please try again.", "light-red", 3000)
+      );
     }
   };
 };

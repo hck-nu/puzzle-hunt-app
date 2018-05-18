@@ -9,6 +9,7 @@ import Registration from "./registration";
 import Login from "./login";
 import Dashboard from "./dashboard";
 import NotFound from "../components/not_found";
+import Banner from "../containers/banner";
 
 class AppContainer extends Component {
   constructor(props) {
@@ -24,9 +25,15 @@ class AppContainer extends Component {
   };
 
   render() {
-    const { isLoggedIn } = this.props;
+    const { isLoggedIn, bannerIsShown, bannerText, bannerColor } = this.props;
+    console.log(bannerText);
     return (
       <div className="w-100 min-vh-100">
+        {bannerText ? (
+          <Banner isShown={bannerIsShown} color={bannerColor}>
+            {bannerText}
+          </Banner>
+        ) : null}
         <main className="w-100 min-vh-100">
           <Switch>
             <Route
@@ -66,7 +73,10 @@ class AppContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    isLoggedIn: state.player.isLoggedIn
+    isLoggedIn: state.player.isLoggedIn,
+    bannerText: state.banner.text,
+    bannerIsShown: state.banner.isShown,
+    bannerColor: state.banner.color
   };
 };
 
