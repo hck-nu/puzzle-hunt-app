@@ -92,8 +92,6 @@ export const register = (email, password) => {
 export const login = (email, password) => {
   return async dispatch => {
     dispatch({ type: LOGIN_REQUESTED });
-
-    console.log("LOGGING IN", email, password);
     const response = await Api.loginPlayer(email, password);
     if (isOk(response)) {
       let player = response.player;

@@ -1,6 +1,7 @@
 import Api from "../api";
 import isOk from "./helpers/response";
 import checkTokenAsync from "./helpers/token";
+import { displayBanner } from "./banner";
 
 /* Constants */
 const PUZZLE_REQUESTED = "puzzle/PUZZLE_REQUESTED";
@@ -20,6 +21,19 @@ const ACCESS_HINT_SUCCESS = "puzzle/ACCESS_HINT_SUCCESS";
 
 const GET_ACCESSED_HINTS_SUCCESS = "puzzle/GET_ACCESSED_HINTS_SUCCESS";
 const GET_ACCESSED_HINTS_FAILURE = "puzzle/GET_ACCESSED_HINTS_FAILURE";
+
+const SUCCESS_MESSAGES = [
+  "Yep, that's right! You're a natural.",
+  "That's correct. You are the chosen one.",
+  "Wow! That's correct. Puzzle hunting legend.",
+  "Yes! You really nailed that one!"
+];
+const FAILURE_MESSAGES = [
+  "Oh no, that's not right. Please try again!",
+  "Smh, that's incorrect. Better luck next time.",
+  "Not quite. Try again!",
+  "LOL no. You can do better than that!"
+];
 
 let initialState = {
   puzzle: null,
@@ -45,7 +59,6 @@ export default (state = initialState, action) => {
         puzzles: action.puzzles
       };
     case GET_ACCESSED_HINTS_SUCCESS:
-      console.log("ACTION", action.accessed_hints);
       return {
         ...state,
         accessed_hints: action.accessed_hints
@@ -53,6 +66,14 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
+};
+
+const getSuccessMessage = () => {
+  return SUCCESS_MESSAGES[Math.floor(Math.random() * SUCCESS_MESSAGES.length)];
+};
+
+const getFailureMessage = () => {
+  return FAILURE_MESSAGES[Math.floor(Math.random() * FAILURE_MESSAGES.length)];
 };
 
 export const getPuzzle = id => {
@@ -95,8 +116,26 @@ export const verifyAndCompletePuzzle = (id, answer) => {
     );
 
     if (isOk(response)) {
-      dispatch({ type: VERIFY_ANSWER_SUCCESS });
+      console.log("RESPONSE", response);
+      if (response.meta.success) {
+        dispatch({ type: VERIFY_ANSWER_SUCCESS });
+        dispatch(displayBanner(getSuccessMessage(), "light-green", 3000));
+      } else {
+        if (response.meta.incorrect) {
+          dispatch(displayBanner(getFailureMessage(), "light-red", 3000));
+        } else {
+          dispatch(displayBanner(response.meta.message, "light-red", 3000));
+        }
+        dispatch({ type: VERIFY_ANSWER_FAILURE });
+      }
     } else {
+      dispatch(
+        displayBanner(
+          "Something went wrong. Please try again in a bit!",
+          "light-red",
+          3000
+        )
+      );
       dispatch({ type: VERIFY_ANSWER_FAILURE });
     }
   };
@@ -108,7 +147,6 @@ export const getAccessedHints = puzzleId => {
       checkTokenAsync(Api.getAccessHints, puzzleId)
     );
 
-    console.log(response);
     if (isOk(response)) {
       dispatch({
         type: GET_ACCESSED_HINTS_SUCCESS,
@@ -127,7 +165,7 @@ export const accessHint = (puzzleId, hintId) => {
     const response = await dispatch(
       checkTokenAsync(Api.accessPuzzleHint, puzzleId, hintId)
     );
-    console.log(response);
+
     if (isOk(response)) {
       dispatch({ type: ACCESS_HINT_SUCCESS });
       dispatch(getAccessedHints(puzzleId));

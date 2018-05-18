@@ -26,7 +26,7 @@ class AppContainer extends Component {
 
   render() {
     const { isLoggedIn, bannerIsShown, bannerText, bannerColor } = this.props;
-    console.log(bannerText);
+
     return (
       <div className="w-100 min-vh-100">
         {bannerText ? (

@@ -24,7 +24,6 @@ let initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case TEAM_RECEIVED:
-      console.log("team received in team");
       return {
         ...state,
         team: action.team
@@ -84,7 +83,6 @@ export const submitTeam = teamName => {
   return async dispatch => {
     const response = await dispatch(checkTokenAsync(Api.submitTeam, teamName));
     if (isOk(response)) {
-      console.log("SUBMIT", response);
       dispatch({ type: TEAM_RECEIVED, team: response.team });
     } else {
       dispatch({ type: TEAM_NOT_RECEIVED });
