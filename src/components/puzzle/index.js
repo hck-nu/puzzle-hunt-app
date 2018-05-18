@@ -4,6 +4,8 @@ import config from "../../config";
 import Button from "../common/button";
 import Input from "../common/input";
 import NotFound from "../not_found";
+import AudioPuzzle from "./audio_puzzle";
+import ImagePuzzle from "./image_puzzle";
 import "../../css/puzzle.css";
 
 export default class PuzzlePage extends Component {
@@ -75,17 +77,13 @@ export default class PuzzlePage extends Component {
     if (!puzzle) {
       return <NotFound />;
     }
-
-    const puzzlePath = `${window.PUBLIC_URL}/puzzles/${puzzle.path}.jpg`;
-
     return (
       <div id="puzzle" className="bg-white">
         <section id="content" className="h-100 bg-white dib fl">
-          {puzzle.description && (
-            <div id="puzzle-description">{puzzle.description}</div>
-          )}
-          {puzzle.puzzle_type === "image" && (
-            <img alt={puzzle.name} src={puzzlePath} />
+          {puzzle.puzzle_type === "audio" ? (
+            <AudioPuzzle puzzle={puzzle} />
+          ) : (
+            <ImagePuzzle puzzle={puzzle} />
           )}
         </section>
         <section id="sidebar" className="h-100 bg-light-gray pa3 dib fl">
