@@ -135,6 +135,8 @@ export default class PuzzlePage extends Component {
               <Button className="prev-next">Next Puzzle</Button>
             </div>
           </div>
+
+          <img id="logo" src={require("../logo.png")} alt="Logo" />
         </section>
       </div>
     );
