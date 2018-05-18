@@ -83,3 +83,9 @@
   height: 100vh;
 }
 
+#audio-style{
+  margin: 5% 0;
+  width: 100%;
+  background-color: none;
+}
+
