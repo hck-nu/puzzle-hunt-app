@@ -1,21 +1,32 @@
 import React, { Component } from "react";
 import Button from "../common/button";
 import Input from "../common/input";
+import validate from "../common/validate";
 
 export default class Teams extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: ""
+      name: "",
+      error: ""
     };
   }
 
   onChangeName(name) {
-    this.setState({ name });
+    this.setState({ name, error: "" });
   }
 
   onTeamNameSubmit = async () => {
     const name = this.state.name;
+
+    if (!validate.isValidTeamName(name)) {
+      this.setState({
+        error:
+          "A team name should have a minimum of 3 characters and should only contain letters and numbers"
+      });
+      return;
+    }
+
     this.setState({ name: "" });
     if (this.props.player && this.props.player.team_id) {
       await this.props.leaveTeam();
@@ -59,6 +70,9 @@ export default class Teams extends Component {
                 this.onTeamNameSubmit();
               }}
             >
+              {this.state.error && (
+                <label className="pb2 dib lh-copy f6">{this.state.error}</label>
+              )}
               <Input
                 placeholder="Enter a team name to join"
                 value={this.state.name}

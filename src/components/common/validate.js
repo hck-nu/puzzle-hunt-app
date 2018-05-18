@@ -16,7 +16,13 @@ const isValidPassword = function(password) {
   return validateStringBasedOnRegex(password, re);
 };
 
+const isValidTeamName = function(teamName) {
+  const re = /^[a-zA-Z0-9_]{3,}$/;
+  return validateStringBasedOnRegex(teamName, re);
+};
+
 export default {
   isEmail,
-  isValidPassword
+  isValidPassword,
+  isValidTeamName
 };
