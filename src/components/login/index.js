@@ -8,22 +8,18 @@ export default class LoginPage extends Component {
     super(props);
     this.state = {
       email: "",
-      password: "",
-      hasError: false,
-      errorLabel: null
+      password: ""
     };
   }
 
   onEmailInputUpdate(email) {
     this.setState({
-      hasError: false,
       email
     });
   }
 
   onPasswordUpdate(password) {
     this.setState({
-      hasError: false,
       password
     });
   }
@@ -31,14 +27,13 @@ export default class LoginPage extends Component {
   resetForm() {
     this.setState({
       email: "",
-      password: "",
-      hasError: false,
-      errorLabel: null
+      password: ""
     });
   }
 
   onSubmitCredentials = async () => {
     const { email, password } = this.state;
+
     this.resetForm();
     await this.props.login(email, password);
   };
@@ -55,9 +50,6 @@ export default class LoginPage extends Component {
               this.onSubmitCredentials();
             }}
           >
-            <label className="error karla gray f6 antialias mt1">
-              {this.state.hasError ? this.state.errorLabel : null}
-            </label>
             <Input
               placeholder="Email"
               type="text"
@@ -79,7 +71,7 @@ export default class LoginPage extends Component {
             </Button>
           </form>
           <div>
-            <label className="error karla gray f6 antialias mt1 text">
+            <label className="karla gray f6 antialias mt1 text">
               Don't have an account?{" "}
               <Link className="tabbed-link white" to={"/register"}>
                 Create an account

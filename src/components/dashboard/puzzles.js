@@ -53,13 +53,13 @@ export default class Puzzles extends Component {
             <div>{this.renderPuzzles()}</div>
           </div>
         ) : (
-          <div>
+          <div className="tc">
             <h1 className="ma0 pb2 pt3">
               Sorry, you must join a team to view these puzzles!
             </h1>
-            <p>
+            <p className="f3">
               <a
-                className="tabbed-link lh-copy fr"
+                className="tabbed-link lh-copy"
                 onClick={e => this.props.changeTab(1)}
               >
                 Join a team

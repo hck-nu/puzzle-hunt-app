@@ -11,22 +11,21 @@ export default class RegistrationPage extends Component {
     this.state = {
       email: "",
       password: "",
-      hasError: false,
-      errorLabel: null
+      error: ""
     };
   }
 
   onEmailInputUpdate(email) {
     this.setState({
-      hasError: false,
-      email
+      email,
+      error: ""
     });
   }
 
   onPasswordUpdate(password) {
     this.setState({
-      hasError: false,
-      password
+      password,
+      error: ""
     });
   }
 
@@ -34,8 +33,7 @@ export default class RegistrationPage extends Component {
     this.setState({
       email: "",
       password: "",
-      hasError: false,
-      errorLabel: null
+      error: ""
     });
   }
 
@@ -44,16 +42,14 @@ export default class RegistrationPage extends Component {
 
     if (!validate.isEmail(email)) {
       this.setState({
-        hasError: true,
-        errorLabel: "Must give a valid email before registering"
+        error: "Must give a valid email before registering"
       });
       return;
     }
 
     if (!validate.isValidPassword(password)) {
       this.setState({
-        hasError: true,
-        errorLabel:
+        error:
           "Must provide a password with 8 or more characters, with at least one letter and one number."
       });
       return;
@@ -75,9 +71,11 @@ export default class RegistrationPage extends Component {
               this.onSubmitCredentials();
             }}
           >
-            <label className="error karla gray f6 antialias mt1">
-              {this.state.hasError ? this.state.errorLabel : null}
-            </label>
+            {this.state.error && (
+              <label className="white pb3 dib lh-copy f6">
+                {this.state.error}
+              </label>
+            )}
             <Input
               class="field"
               placeholder="Email"
