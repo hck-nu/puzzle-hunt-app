@@ -32,7 +32,8 @@ const FAILURE_MESSAGES = [
   "Oh no, that's not right. Please try again!",
   "Smh, that's incorrect. Better luck next time.",
   "Not quite. Try again!",
-  "LOL no. You can do better than that!"
+  "Nope. You can do better than that!",
+  "Correct...Opposite day!"
 ];
 
 let initialState = {
@@ -116,7 +117,6 @@ export const verifyAndCompletePuzzle = (id, answer) => {
     );
 
     if (isOk(response)) {
-      console.log("RESPONSE", response);
       if (response.meta.success) {
         dispatch({ type: VERIFY_ANSWER_SUCCESS });
         dispatch(displayBanner(getSuccessMessage(), "light-green", 3000));

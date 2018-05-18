@@ -45,6 +45,23 @@ export default class Profile extends Component {
             <p className="ma0 b">Team members:</p>
             {this.renderTeamMembers()}
           </div>
+          <div id="puzzle-stats">
+            <p className="ma0 lh-copy pb3">
+              <span className="b">Completed puzzles: </span>
+              {this.props.team && this.props.team.Puzzles
+                ? this.props.team.Puzzles.length
+                : 0}
+            </p>
+          </div>
+          <Button
+            className="bg-pink w-100"
+            onClick={e => {
+              e.preventDefault();
+              this.props.leaveTeam();
+            }}
+          >
+            Leave team
+          </Button>
         </div>
       );
     }
@@ -74,23 +91,6 @@ export default class Profile extends Component {
             </p>
           </div>
           <div id="team-profile">{this.renderTeam()}</div>
-          <div id="puzzle-stats">
-            <p className="ma0 lh-copy pb3">
-              <span className="b">Completed puzzles: </span>
-              {this.props.team && this.props.team.Puzzles
-                ? this.props.team.Puzzles.length
-                : 0}
-            </p>
-          </div>
-          <Button
-            className="bg-pink w-100"
-            onClick={e => {
-              e.preventDefault();
-              this.props.leaveTeam();
-            }}
-          >
-            Leave team
-          </Button>
         </section>
         <section id="leaderboard" className="dib fr h-100 pb3">
           <h1 className="mt0">Leaderboard</h1>

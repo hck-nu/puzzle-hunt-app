@@ -1,6 +1,7 @@
 import Api from "../api";
 import isOk from "./helpers/response";
 import checkTokenAsync from "./helpers/token";
+import { displayBanner } from "./banner";
 
 /* Constants */
 export const TEAM_RECEIVED = "team/TEAM_RECEIVED";
@@ -83,8 +84,14 @@ export const submitTeam = teamName => {
   return async dispatch => {
     const response = await dispatch(checkTokenAsync(Api.submitTeam, teamName));
     if (isOk(response)) {
-      dispatch({ type: TEAM_RECEIVED, team: response.team });
+      if (response.meta.success) {
+        dispatch({ type: TEAM_RECEIVED, team: response.team });
+        dispatch(
+          displayBanner("Successfully joined team!", "light-green", 3000)
+        );
+      }
     } else {
+      console.log(response);
       dispatch({ type: TEAM_NOT_RECEIVED });
     }
   };
@@ -110,7 +117,21 @@ export const leaveTeam = () => {
 
     if (isOk(response)) {
       dispatch({ type: LEFT_TEAM_SUCCESS, team: null });
+      dispatch(
+        displayBanner(
+          "Good riddance. Successfully left your team!",
+          "light-green",
+          3000
+        )
+      );
     } else {
+      dispatch(
+        displayBanner(
+          "Something went wrong! Please try again later.",
+          "light-red",
+          3000
+        )
+      );
       dispatch({ type: LEFT_TEAM_FAILURE });
     }
   };
