@@ -18,13 +18,16 @@
     "redux-thunk": "^2.2.0"
   },
   "scripts": {
-    "start": "parallelshell \"watch 'npm run build:minify' ./src/css/\" \"react-scripts start\"",
+    "start":
+      "parallelshell \"watch 'npm run build:minify' ./src/css/\" \"react-scripts start\"",
     "build": "npm run build:css && npm run build:minify && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "mutations": "immutable-css src/tachyons.css --strict",
-    "build:css": "tachyons src/css/tachyons.css > public/tachyons.css",
-    "build:minify": "tachyons src/css/tachyons.css -m > public/tachyons.min.css"
+    "build:css":
+      "./node_modules/.bin/tachyons src/css/tachyons.css > public/tachyons.css",
+    "build:minify":
+      "./node_modules/.bin/tachyons src/css/tachyons.css -m > public/tachyons.min.css"
   },
   "devDependencies": {
     "http": "0.0.0",

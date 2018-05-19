@@ -1170,6 +1170,7 @@ code, .code { font-family: Consolas, monaco, monospace; }
 .mid-gray { color: #555; }
 .gray { color: #777; }
 .silver { color: #999; }
+.bronze { color: #cd7f32; }
 .light-silver { color: #aaa; }
 .moon-gray { color: #ccc; }
 .light-gray { color: #eee; }
@@ -1201,12 +1202,12 @@ code, .code { font-family: Consolas, monaco, monospace; }
 .washed-yellow { color: #fffceb; }
 .washed-red { color: #ffdfdf; }
 .color-inherit { color: inherit; }
-.wh-navy { color: #171938; }
-.wh-black { color: #010020; }
-.wh-gold { color: #c1aa77; }
-.wh-sand { color: #e7e4d3; }
-.wh-pink { color: #ed8580; }
-.wh-off-white { color: #e7e4d3; }
+.dark-navy { color: #171938; }
+.black { color: #010020; }
+.gold { color: #c1aa77; }
+.sand { color: #e7e4d3; }
+.shell { color: #ed8580; }
+.off-white { color: #e7e4d3; }
 .bg-black-90 { background-color: rgba( 0, 0, 0, .9 ); }
 .bg-black-80 { background-color: rgba( 0, 0, 0, .8 ); }
 .bg-black-70 { background-color: rgba( 0, 0, 0, .7 ); }
@@ -1256,6 +1257,7 @@ code, .code { font-family: Consolas, monaco, monospace; }
 .bg-green { background-color: #19a974; }
 .bg-light-green { background-color: #9eebcf; }
 .bg-navy { background-color: #001b44; }
+.bg-hck-navy { background-color: #07024f; }
 .bg-dark-blue { background-color: #00449e; }
 .bg-blue { background-color: #357edd; }
 .bg-light-blue { background-color: #96ccff; }
@@ -1265,12 +1267,14 @@ code, .code { font-family: Consolas, monaco, monospace; }
 .bg-washed-yellow { background-color: #fffceb; }
 .bg-washed-red { background-color: #ffdfdf; }
 .bg-inherit { background-color: inherit; }
-.bg-wh-navy { background-color: #171938; }
-.bg-wh-black { background-color: #010020; }
-.bg-wh-gold { background-color: #c1aa77; }
-.bg-wh-sand { background-color: #e7e4d3; }
-.bg-wh-pink { background-color: #ed8580; }
-.bg-wh-off-white { background-color: #e7e4d3; }
+.bg-navy { background-color: #171938; }
+.bg-black { background-color: #010020; }
+.bg-gold { background-color: #c1aa77; }
+.bg-sand { background-color: #e7e4d3; }
+.bg-pink { background-color: #ed8580; }
+.bg-off-white { background-color: #e7e4d3; }
+.bg-bronze { background-color: #cd7f32; }
+.bg-silver { background-color: #999; }
 /* 
   
    SKINS:PSEUDO
@@ -2050,6 +2054,18 @@ code, .code { font-family: Consolas, monaco, monospace; }
 .w-01 { width: .1px; }
 .h-01 { height: .1px; }
 .pe-none { pointer-events: none; }
+.tabbed-link { font-weight: 700; text-decoration: underline; cursor: pointer; }
+#dashboard #content { max-width: 800px; margin: 0 auto; }
+#dashboard nav .nav-item:hover { border-bottom: 3px solid #fff; }
+#dashboard nav .nav-item.active { border-bottom: 3px solid #fff; }
+#dashboard nav a.nav-item { text-decoration: none; color: white; }
+#dashboard #create-team .form-container, #dashboard .leave-team { max-width: 400px; margin: 0 auto; }
+#dashboard #content { padding-bottom: 10px; }
+#dashboard #puzzle-list .puzzle-item { text-decoration: none; color: white; cursor: pointer; border: 1px solid white; border-radius: 5px; display: block; }
+#dashboard #puzzle-list .puzzle-item:hover { background-color: #040333; }
+#dashboard #team-stats { width: 250px; border-radius: 3px; }
+#dashboard #leaderboard { width: 60%; }
+#dashboard #leaderboard .leaderboard-item:nth-child(odd) { background-color: #040333; }
 /* Variables */
 /* Importing here will allow you to override any variables in the modules */
 /*
@@ -3383,5 +3399,10 @@ code, .code { font-family: Consolas, monaco, monospace; }
  .v-mid-l { vertical-align: middle; }
  .v-top-l { vertical-align: top; }
  .v-btm-l { vertical-align: bottom; }
+}
+@media screen and (max-width: 800px) {
+ #dashboard #leaderboard, #dashboard #team-stats { width: 100%; }
+ #dashboard #team-stats { position: relative; margin-bottom: 20px; }
+ #dashboard #profile { padding-top: 60px; padding-left: 5px; padding-right: 5px; }
 }
 
