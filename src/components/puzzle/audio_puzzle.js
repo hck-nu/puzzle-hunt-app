@@ -1,7 +1,6 @@
 import React from "react";
 import "../../css/puzzle.css";
 
-
 const AudioPuzzle = ({ puzzle }) => {
   const audiopath = `${window.PUBLIC_URL}/puzzles/${puzzle.path}`;
   const audiofiles = [
@@ -14,7 +13,7 @@ const AudioPuzzle = ({ puzzle }) => {
   ];
   return (
     <div className="audio-puzzle">
-      <p className="pb3">{puzzle.description}</p>
+      <p className="pb3 pt6">{puzzle.description}</p>
       {audiofiles.map((file, i) => {
         return (
           <audio id="audio-style" key={i} controls className="db">

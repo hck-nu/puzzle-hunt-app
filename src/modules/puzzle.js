@@ -19,6 +19,7 @@ const VERIFY_ANSWER_FAILURE = "puzzle/VERIFY_ANSWER_FAILURE";
 const ACCESS_HINT_FAILURE = "puzzle/ACCESS_HINT_FAILURE";
 const ACCESS_HINT_SUCCESS = "puzzle/ACCESS_HINT_SUCCESS";
 
+const REQUEST_ACCESSED_HINTS = "puzzle/REQUEST_ACCESSED_HINTS";
 const GET_ACCESSED_HINTS_SUCCESS = "puzzle/GET_ACCESSED_HINTS_SUCCESS";
 const GET_ACCESSED_HINTS_FAILURE = "puzzle/GET_ACCESSED_HINTS_FAILURE";
 
@@ -46,30 +47,54 @@ const POINT_DEDUCTIONS = {
 let initialState = {
   puzzle: null,
   puzzles: [],
-  accessed_hints: []
+  accessed_hints: [],
+  requestingPuzzle: true
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case PUZZLE_REQUESTED:
-      return state;
+      return {
+        ...state,
+        requestingPuzzle: true,
+        accessed_hints: []
+      };
     case PUZZLE_RECEIVED:
       return {
         ...state,
+        requestingPuzzle: false,
         puzzle: action.puzzle
       };
     case PUZZLE_FAILED:
-      return state;
-
+      return {
+        ...state,
+        requestingPuzzle: false,
+        puzzle: null,
+        accessed_hints: []
+      };
     case ALL_PUZZLES_SUCCESS:
       return {
         ...state,
         puzzles: action.puzzles
       };
+    case REQUEST_ACCESSED_HINTS:
+      console.log("HELLO");
+      return {
+        ...state,
+        requestingPuzzle: true,
+        accessed_hints: []
+      };
     case GET_ACCESSED_HINTS_SUCCESS:
       return {
         ...state,
+        requestingPuzzle: false,
         accessed_hints: action.accessed_hints
+      };
+    case GET_ACCESSED_HINTS_FAILURE:
+      return {
+        ...state,
+        requestingPuzzle: false,
+        accessed_hints: []
       };
     default:
       return state;
@@ -170,7 +195,6 @@ export const getAccessedHints = puzzleId => {
 const pointDeductionMessage = hintType => {
   return dispatch => {
     if (hintType in POINT_DEDUCTIONS) {
-      console.log(hintType, typeof hintType);
       dispatch(
         displayBanner(
           `Added ${POINT_DEDUCTIONS[hintType]} minutes to your team's time`,
@@ -184,6 +208,7 @@ const pointDeductionMessage = hintType => {
 
 export const accessHint = (puzzleId, hintId) => {
   return async dispatch => {
+    dispatch({ type: REQUEST_ACCESSED_HINTS });
     const response = await dispatch(
       checkTokenAsync(Api.accessPuzzleHint, puzzleId, hintId)
     );

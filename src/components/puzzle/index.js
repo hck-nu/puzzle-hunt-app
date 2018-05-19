@@ -7,7 +7,6 @@ import NotFound from "../not_found";
 import AudioPuzzle from "./audio_puzzle";
 import ImagePuzzle from "./image_puzzle";
 import "../../css/puzzle.css";
-import { Link } from "react-router-dom";
 
 export default class PuzzlePage extends Component {
   constructor(props) {
@@ -17,10 +16,10 @@ export default class PuzzlePage extends Component {
     };
   }
 
-  componentWillMount() {
-    this.props.getPuzzle(this.props.id);
-    this.props.getAccessedHints(this.props.id);
-  }
+  componentWillMount = async () => {
+    await this.props.getPuzzle(this.props.id);
+    await this.props.getAccessedHints(this.props.id);
+  };
 
   onAnswerInputChange(answer) {
     this.setState({ answer });
@@ -33,11 +32,15 @@ export default class PuzzlePage extends Component {
   };
 
   decryptHint = hint => {
-    const key = config.DECRYPTION_KEY;
-    let decipher = crypto.createDecipher("aes-256-ctr", key);
-    let dec = decipher.update(hint.description, "hex", "utf8");
-    dec += decipher.final("utf8");
-    return dec;
+    try {
+      const key = config.DECRYPTION_KEY;
+      let decipher = crypto.createDecipher("aes-256-ctr", key);
+      let dec = decipher.update(hint.description, "hex", "utf8");
+      dec += decipher.final("utf8");
+      return dec;
+    } catch (err) {
+      return;
+    }
   };
 
   accessHint = async hint => {
@@ -72,24 +75,44 @@ export default class PuzzlePage extends Component {
     }
   }
 
- // nextPuzzle(puzzleID){
+  prevPuzzleId() {
+    let puzzleLength = (this.props.puzzles || []).length;
+    if (puzzleLength > 1) {
+      let start = this.props.puzzles[0].id;
+      let end = start + puzzleLength;
+      let prevId = parseInt(this.props.id, 10) - 1;
 
- //    if (puzzleID < 6)
- //    {
- //      puzzleID += 1;
- //    }
- //    else
- //      puzzleID = 1;
- // return puzzleID;
- //  }
+      if (prevId >= start) {
+        return prevId;
+      } else {
+        return end - 1;
+      }
+    }
+  }
+
+  nextPuzzleId() {
+    let puzzleLength = (this.props.puzzles || []).length;
+
+    if (puzzleLength > 1) {
+      let start = this.props.puzzles[0].id;
+      let end = start + puzzleLength;
+      let nextId = parseInt(this.props.id, 10) + 1;
+
+      if (nextId < end) {
+        return nextId;
+      } else {
+        return start + nextId % end;
+      }
+    }
+  }
 
   render() {
     const { puzzle } = this.props;
 
-
     if (!puzzle) {
       return <NotFound />;
     }
+
     return (
       <div id="puzzle" className="bg-white">
         <section id="content" className="h-100 bg-white dib fl">
@@ -131,12 +154,21 @@ export default class PuzzlePage extends Component {
               (+10 minutes), Silver (+20 minutes), Gold (+30 minutes)
             </label>
             <div id="puzzle-buttons">
-              <Button className="prev-next">Previous Puzzle</Button>
-              <Button className="prev-next">Next Puzzle</Button>
+              <Button
+                className="prev-next"
+                to={`/puzzle/${this.prevPuzzleId()}`}
+              >
+                Previous Puzzle
+              </Button>
+              <Button
+                className="prev-next"
+                to={`/puzzle/${this.nextPuzzleId()}`}
+              >
+                Next Puzzle
+              </Button>
             </div>
           </div>
-
-          <img id="logo" src={require("../logo.png")} alt="Logo" />
+          <img id="logo" src={`${window.PUBLIC_URL}/logo.png`} alt="Logo" />
         </section>
       </div>
     );

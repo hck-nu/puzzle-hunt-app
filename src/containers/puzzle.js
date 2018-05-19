@@ -18,7 +18,9 @@ class PuzzleContainer extends Component {
 const mapStateToProps = state => {
   return {
     puzzle: state.puzzle.puzzle,
-    accessed_hints: state.puzzle.accessed_hints
+    accessed_hints: state.puzzle.accessed_hints,
+    requestingPuzzle: state.puzzle.requestingPuzzle,
+    puzzles: state.puzzle.puzzles
   };
 };
 
