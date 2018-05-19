@@ -21,6 +21,7 @@
     "start":
       "parallelshell \"watch 'npm run build:minify' ./src/css/\" \"react-scripts start\"",
     "build": "npm run build:css && npm run build:minify && react-scripts build",
+    "prod": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "mutations": "immutable-css src/tachyons.css --strict",
