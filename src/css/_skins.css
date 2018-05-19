@@ -88,6 +88,9 @@
 .silver {
   color: var(--silver);
 }
+.bronze {
+  color: var(--bronze);
+}
 .light-silver {
   color: var(--light-silver);
 }

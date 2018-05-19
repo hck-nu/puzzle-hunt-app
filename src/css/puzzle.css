@@ -52,15 +52,6 @@
 
 #puzzle #hints {
   margin: 10px auto;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  height: 13vw;
-  flex-direction: column-reverse;
-  -ms-flex-pack: space-evenly;
-  justify-content: space-evenly;
-  align-items: center;
 }
 
 #puzzle #sidebar {
@@ -68,13 +59,23 @@
   height: 100vh;
 }
 
+#puzzle #sidebar .input-container {
+  position: relative;
+}
+
 #puzzle-buttons {
-  display: flex;
-  flex-wrap: wrap;
+  text-align: center;
+  padding-top: 30px;
+  position: absolute;
+  bottom: 20px;
 }
 
 .prev-next {
   background-color: #6fc470;
+}
+
+.prev-next:last-child {
+  margin-left: 10px;
 }
 
 #puzzle-pic {
@@ -86,4 +87,65 @@
   padding-bottom: 20px;
   text-align: center;
   background-color: none;
+}
+
+@media screen and (max-width: 1250px) {
+  #puzzle-buttons .prev-next {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+  }
+  #puzzle-buttons .prev-next:last-child {
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  #puzzle {
+    display: block;
+  }
+  #puzzle #content {
+    width: 100%;
+    max-width: 600px;
+    float: none;
+    height: auto;
+    display: block;
+  }
+  #puzzle #puzzle-pic {
+    width: 100%;
+    height: auto;
+  }
+
+  #puzzle #sidebar {
+    width: 100%;
+    max-width: none;
+    height: auto;
+  }
+
+  #puzzle #sidebar .input-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  #puzzle-buttons {
+    position: relative;
+  }
+
+  #puzzle-buttons .prev-next {
+    width: auto;
+    display: inline-block;
+    margin-bottom: 0;
+  }
+
+  #puzzle-buttons .prev-next:last-child {
+    margin-left: 10px;
+  }
+
+  #puzzle #sidebar .input-container .text-input {
+    width: 60%;
+  }
+
+  #puzzle #sidebar .input-container .submit-button {
+    width: 30%;
+  }
 }

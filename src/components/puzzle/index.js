@@ -58,12 +58,15 @@ export default class PuzzlePage extends Component {
             return el.id === hint.id;
           }) > -1;
         return (
-          <div className="hint-item" key={i}>
+          <div className="hint-item pb2 pt2" key={i}>
             {accessedBefore ? (
-              <div>{this.decryptHint(hint)}</div>
+              <div className="lh-copy">
+                <span className={`${hint.type}`}>{hintType}: </span>
+                {this.decryptHint(hint)}
+              </div>
             ) : (
               <Button
-                backgroundColor={`bg-${hint.type}`}
+                backgroundColor={`bg-${hint.type} w-100`}
                 onClick={e => this.accessHint(hint)}
               >
                 {hintType} Hint
@@ -123,7 +126,7 @@ export default class PuzzlePage extends Component {
           )}
         </section>
         <section id="sidebar" className="h-100 bg-light-gray pa3 dib fl">
-          <div className="input-container">
+          <div className="input-container h-100">
             <form
               onSubmit={e => {
                 e.preventDefault();
@@ -149,11 +152,11 @@ export default class PuzzlePage extends Component {
             </form>
 
             <div id="hints">{this.renderHints()}</div>
-            <label className="f6">
-              Your team incur's a point deduction by accessing hints. Bronze
-              (+10 minutes), Silver (+20 minutes), Gold (+30 minutes)
+            <label className="f6 pb3 db">
+              Your team incurs a point deduction by accessing hints. Bronze (+10
+              minutes), Silver (+20 minutes), Gold (+30 minutes)
             </label>
-            <div id="puzzle-buttons">
+            <div id="puzzle-buttons" className="w-100">
               <Button
                 className="prev-next"
                 to={`/puzzle/${this.prevPuzzleId()}`}
@@ -168,7 +171,7 @@ export default class PuzzlePage extends Component {
               </Button>
             </div>
           </div>
-          <img id="logo" src={`${window.PUBLIC_URL}/logo.png`} alt="Logo" />
+          {/* <img id="logo" src={`${window.PUBLIC_URL}/logo.png`} alt="Logo" /> */}
         </section>
       </div>
     );

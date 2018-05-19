@@ -56,8 +56,7 @@ export default (state = initialState, action) => {
     case PUZZLE_REQUESTED:
       return {
         ...state,
-        requestingPuzzle: true,
-        accessed_hints: []
+        requestingPuzzle: true
       };
     case PUZZLE_RECEIVED:
       return {
@@ -69,8 +68,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         requestingPuzzle: false,
-        puzzle: null,
-        accessed_hints: []
+        puzzle: null
       };
     case ALL_PUZZLES_SUCCESS:
       return {
@@ -78,11 +76,9 @@ export default (state = initialState, action) => {
         puzzles: action.puzzles
       };
     case REQUEST_ACCESSED_HINTS:
-      console.log("HELLO");
       return {
         ...state,
-        requestingPuzzle: true,
-        accessed_hints: []
+        requestingPuzzle: true
       };
     case GET_ACCESSED_HINTS_SUCCESS:
       return {

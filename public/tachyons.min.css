@@ -1170,6 +1170,7 @@ code, .code { font-family: Consolas, monaco, monospace; }
 .mid-gray { color: #555; }
 .gray { color: #777; }
 .silver { color: #999; }
+.bronze { color: #cd7f32; }
 .light-silver { color: #aaa; }
 .moon-gray { color: #ccc; }
 .light-gray { color: #eee; }

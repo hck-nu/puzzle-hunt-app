@@ -13,6 +13,7 @@ export default class Teams extends Component {
   }
 
   onChangeName(name) {
+    console.log("ON CHANGE", name);
     this.setState({ name, error: "" });
   }
 
